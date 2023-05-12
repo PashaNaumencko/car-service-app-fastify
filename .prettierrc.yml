@@ -7,7 +7,3 @@ quoteProps: preserve
 trailingComma: none
 bracketSpacing: true
 arrowParens: avoid
-overrides:
-  - files: '*.scss'
-    options:
-      singleQuote: false

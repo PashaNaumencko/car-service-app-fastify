@@ -22,7 +22,6 @@ class User extends Abstract {
       .query()
       .select('id', 'createdAt', 'email', 'updatedAt', 'username')
       .where({ id })
-      .withGraphFetched('[image]')
       .first();
   }
 }

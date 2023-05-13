@@ -6,6 +6,8 @@ import { Model } from 'objection';
 
 import knexConfig from '../knexfile.js';
 import { ENV, ExitCode } from './common/enums/enums.js';
+import { auth, user } from './services/services.js';
+import { initApi } from './api/api.js';
 
 class App {
   #app;
@@ -34,6 +36,14 @@ class App {
         methods: '*',
         credentials: true
       }
+    });
+
+    app.register(initApi, {
+      services: {
+        auth,
+        user
+      },
+      prefix: ENV.APP.API_PATH
     });
 
     const staticPath = new URL('../../client/build', import.meta.url);

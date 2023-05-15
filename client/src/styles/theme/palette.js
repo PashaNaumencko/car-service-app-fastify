@@ -4,7 +4,7 @@ export const palette = {
     black: '#000000'
   },
   primary: {
-    main: '#1669FF'
+    main: '#4C6EF5'
   },
   secondary: {
     main: '#EAF2FF'
@@ -25,7 +25,7 @@ export const palette = {
     hover: '#327AFC',
     disabled: '#A8B6CD',
     disabledSecondary: '#F5F9F7',
-    pressed: '#1669FF'
+    pressed: '#4C6EF5'
   },
   others: {
     background: '#F5F7F9',

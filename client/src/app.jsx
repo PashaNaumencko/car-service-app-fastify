@@ -1,13 +1,21 @@
-import { CssBaseline, ThemeProvider, Typography } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { Routes, Route } from 'react-router-dom';
+import { AppRoute } from 'common/enums/enums';
+import { Sign } from 'components/sign/sign';
+import { Main } from 'components/common/common';
 import { theme } from 'styles/theme';
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Typography variant="h1" color="primary">
-        Welcome to Car App Service
-      </Typography>
+      <Main>
+        <Routes>
+          <Route path={AppRoute.LOGIN} element={<Sign />} />
+          <Route path={AppRoute.REGISTRATION} element={<Sign />} />
+          <Route path={AppRoute.ANY} element={<></>} />
+        </Routes>
+      </Main>
     </ThemeProvider>
   );
 };

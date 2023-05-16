@@ -1,17 +1,20 @@
 import {
+  Visibility as VisibilityIcon,
+  VisibilityOff as VisibilityOffIcon
+} from '@mui/icons-material';
+import {
   Box,
+  Stack,
   Button,
   IconButton,
   InputAdornment,
   Typography
 } from '@mui/material';
-import {
-  Visibility as VisibilityIcon,
-  VisibilityOff as VisibilityOffIcon
-} from '@mui/icons-material';
+import { Input } from 'components/common/common';
+import { AppRoute } from 'common/enums/enums';
 import { useAppForm } from 'hooks/hooks';
 import { useState } from 'react';
-import { Input } from 'components/common/common';
+import { NavLink } from 'react-router-dom';
 import { login as loginValidationSchema } from 'validation-schemas/validation-schemas.js';
 import { StyledForm } from './login-form.styles';
 
@@ -20,7 +23,7 @@ const DEFAULT_LOGIN_FORM_PAYLOAD = {
   password: ''
 };
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = ({ onLogin, isLoading, errorMessage }) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const { control, handleSubmit, formState } = useAppForm({
     defaultValues: DEFAULT_LOGIN_FORM_PAYLOAD,
@@ -84,8 +87,7 @@ const LoginForm = ({ onLogin }) => {
         }}
       >
         <Typography variant="subtitle1" color="others.error">
-          The email and password you entered did not match our records. Please
-          double-check and try again.
+          {errorMessage}
         </Typography>
       </Box>
       <Button
@@ -94,10 +96,18 @@ const LoginForm = ({ onLogin }) => {
         variant="contained"
         fullWidth
         type="submit"
-        disabled={!formState.isDirty || !formState.isValid || false}
+        sx={{ marginBottom: 8 }}
+        disabled={!formState.isDirty || !formState.isValid || isLoading}
       >
         Sign in
       </Button>
+      <Stack direction="row">
+        <Typography variant="subtitle2" marginRight={2}>
+          New to us?
+        </Typography>
+        {/* <span></span> */}
+        <NavLink to={AppRoute.REGISTRATION}>Sign Up</NavLink>
+      </Stack>
     </StyledForm>
   );
 };

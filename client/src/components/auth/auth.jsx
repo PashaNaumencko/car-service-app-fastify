@@ -1,18 +1,24 @@
 import { Typography } from '@mui/material';
+import { AppRoute, DataStatus } from 'common/enums/enums';
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { AppRoute } from 'common/enums/enums';
-// import { profileActionCreator } from 'store/actions.js';
-// import { Image } from 'components/common/common.js';
+import { authActionCreator } from 'store/auth/auth';
 import { LoginForm } from './components/login-form/login-form';
-import { StyledLoginFormContainer } from './sign.styles.js';
+import { StyledLoginFormContainer } from './sign.styles';
 
 const Sign = () => {
+  const dispatch = useDispatch();
+  const { dataStatus, loginError } = useSelector(state => ({
+    dataStatus: state.auth.dataStatus,
+    loginError: state.auth.loginError
+  }));
   const { pathname } = useLocation();
 
-  // const handleLogin = useCallback(
-  //   loginPayload => dispatch(profileActionCreator.login(loginPayload)),
-  //   [dispatch]
-  // );
+  const handleLogin = useCallback(
+    payload => dispatch(authActionCreator.login(payload)),
+    [dispatch]
+  );
 
   // const handleRegister = useCallback(
   //   registerPayload => dispatch(profileActionCreator.register(registerPayload)),
@@ -22,7 +28,13 @@ const Sign = () => {
   const getScreen = path => {
     switch (path) {
       case AppRoute.LOGIN: {
-        return <LoginForm onLogin={() => {}} />;
+        return (
+          <LoginForm
+            onLogin={handleLogin}
+            isLoading={dataStatus === DataStatus.PENDING}
+            errorMessage={loginError}
+          />
+        );
       }
       default: {
         return null;

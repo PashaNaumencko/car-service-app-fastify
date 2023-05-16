@@ -1,8 +1,9 @@
 import { Navigate } from 'react-router-dom';
 import { AppRoute } from 'common/enums/enums';
+import { useSelector } from 'react-redux';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { user } = {};
+  const { user } = useSelector(state => state.sign.user);
 
   const hasUser = Boolean(user);
 

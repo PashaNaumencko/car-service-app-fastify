@@ -1,8 +1,10 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { Routes, Route } from 'react-router-dom';
 import { AppRoute } from 'common/enums/enums';
-import { Sign } from 'components/sign/sign';
 import { Main } from 'components/common/common';
+import { Sign } from 'components/auth/auth';
+import { NotificationContainer } from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
+import { Route, Routes } from 'react-router-dom';
 import { theme } from 'styles/theme';
 
 const App = () => {
@@ -16,6 +18,7 @@ const App = () => {
           <Route path={AppRoute.ANY} element={<></>} />
         </Routes>
       </Main>
+      <NotificationContainer />
     </ThemeProvider>
   );
 };

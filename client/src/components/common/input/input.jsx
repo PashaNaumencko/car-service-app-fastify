@@ -14,7 +14,7 @@ const Input = ({
 }) => {
   const {
     field,
-    fieldState: { isDirty, error }
+    fieldState: { error }
   } = useController({
     name,
     control
@@ -42,7 +42,7 @@ const Input = ({
         endAdornment={endAdornment}
         onChange={handleChange}
         helperText={error?.message}
-        error={isDirty && Boolean(error?.message)}
+        error={Boolean(error?.message)}
       />
     </FormControl>
   );

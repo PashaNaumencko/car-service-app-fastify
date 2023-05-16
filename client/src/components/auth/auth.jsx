@@ -6,12 +6,13 @@ import { useLocation } from 'react-router-dom';
 import { authActionCreator } from 'store/auth/auth';
 import { LoginForm } from './components/login-form/login-form';
 import { StyledLoginFormContainer } from './sign.styles';
+import { RegistrationForm } from './components/registration-form/registration-form';
 
-const Sign = () => {
+const Auth = () => {
   const dispatch = useDispatch();
-  const { dataStatus, loginError } = useSelector(state => ({
+  const { dataStatus, error } = useSelector(state => ({
     dataStatus: state.auth.dataStatus,
-    loginError: state.auth.loginError
+    error: state.auth.error
   }));
   const { pathname } = useLocation();
 
@@ -20,10 +21,10 @@ const Sign = () => {
     [dispatch]
   );
 
-  // const handleRegister = useCallback(
-  //   registerPayload => dispatch(profileActionCreator.register(registerPayload)),
-  //   [dispatch]
-  // );
+  const handleRegister = useCallback(
+    payload => dispatch(authActionCreator.register(payload)),
+    [dispatch]
+  );
 
   const getScreen = path => {
     switch (path) {
@@ -32,7 +33,16 @@ const Sign = () => {
           <LoginForm
             onLogin={handleLogin}
             isLoading={dataStatus === DataStatus.PENDING}
-            errorMessage={loginError}
+            errorMessage={error}
+          />
+        );
+      }
+      case AppRoute.REGISTRATION: {
+        return (
+          <RegistrationForm
+            onRegister={handleRegister}
+            isLoading={dataStatus === DataStatus.PENDING}
+            errorMessage={error}
           />
         );
       }
@@ -52,4 +62,4 @@ const Sign = () => {
   );
 };
 
-export { Sign };
+export { Auth };

@@ -11,3 +11,11 @@ export const StyledLoginFormContainer = styled(Card)(({ theme }) => ({
   padding: theme.spacing(12, 16),
   background: theme.palette.common.white
 }));
+
+export const StyledForm = styled('form')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  flex: 1,
+  padding: theme.spacing(0, 15)
+}));

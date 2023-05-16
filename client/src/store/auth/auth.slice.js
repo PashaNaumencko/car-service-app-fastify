@@ -5,7 +5,7 @@ import { login, register } from './auth.actions';
 const initialState = {
   user: null,
   dataStatus: DataStatus.IDLE,
-  loginError: null
+  error: null
 };
 
 const reducer = createReducer(initialState, builder => {
@@ -21,9 +21,8 @@ const reducer = createReducer(initialState, builder => {
       }
     )
     .addMatcher(isAnyOf(login.rejected, register.rejected), (state, action) => {
-      console.log('action', action);
       state.user = null;
-      state.loginError = action.payload;
+      state.error = action.payload;
       state.dataStatus = DataStatus.REJECTED;
     });
 });

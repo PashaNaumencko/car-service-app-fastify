@@ -24,12 +24,20 @@ const login = createAsyncThunk(
 
 const register = createAsyncThunk(
   ActionType.REGISTER,
-  async (request, { extra: { services } }) => {
-    const { user, token } = await services.auth.registration(request);
+  async (payload, { extra: { services }, dispatch, rejectWithValue }) => {
+    try {
+      const { data } = await dispatch(
+        authApi.endpoints.register.initiate(payload)
+      ).unwrap();
 
-    services.storage.setItem(StorageKey.TOKEN, token);
+      services.storage.setItem(StorageKey.TOKEN, data.token);
 
-    return user;
+      return data.user;
+    } catch (err) {
+      return rejectWithValue(
+        err?.data.message ?? ExceptionMessage.UNKNOWN_ERROR
+      );
+    }
   }
 );
 

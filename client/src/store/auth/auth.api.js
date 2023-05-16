@@ -9,6 +9,13 @@ export const authApi = baseApi.injectEndpoints({
         url: `${ApiPath.AUTH}/${AuthApiPath.LOGIN}`,
         body: payload
       })
+    }),
+    register: build.mutation({
+      query: payload => ({
+        method: HttpMethod.POST,
+        url: `${ApiPath.AUTH}/${AuthApiPath.REGISTER}`,
+        body: payload
+      })
     })
   })
 });

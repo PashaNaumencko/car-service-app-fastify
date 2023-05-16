@@ -4,34 +4,35 @@ import {
 } from '@mui/icons-material';
 import {
   Box,
-  Stack,
   Button,
   IconButton,
   InputAdornment,
+  Stack,
   Typography
 } from '@mui/material';
 import { Input } from 'components/common/common';
-import { AppRoute } from 'common/enums/enums';
-import { useAppForm } from 'hooks/hooks';
+import { AppRoute } from 'common/enums/enums.js';
+import { useAppForm } from 'hooks/hooks.js';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { login as loginValidationSchema } from 'validation-schemas/validation-schemas.js';
+import { registration as registrationValidationSchema } from 'validation-schemas/validation-schemas.js';
 import { StyledForm } from '../../sign.styles';
 
-const DEFAULT_LOGIN_FORM_PAYLOAD = {
+const DEFAULT_REGISTRATION_PAYLOAD = {
+  username: '',
   email: '',
   password: ''
 };
 
-const LoginForm = ({ onLogin, isLoading, errorMessage }) => {
+const RegistrationForm = ({ onRegister, errorMessage, isLoading }) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
-  const { control, handleSubmit, formState } = useAppForm({
-    defaultValues: DEFAULT_LOGIN_FORM_PAYLOAD,
-    validationSchema: loginValidationSchema
+  const { control, formState, handleSubmit } = useAppForm({
+    defaultValues: DEFAULT_REGISTRATION_PAYLOAD,
+    validationSchema: registrationValidationSchema
   });
 
-  const handleSumbitLogin = values => {
-    onLogin(values);
+  const handleSubmitRegister = values => {
+    onRegister(values);
   };
 
   const handleShownPassword = () => {
@@ -43,10 +44,19 @@ const LoginForm = ({ onLogin, isLoading, errorMessage }) => {
   };
 
   return (
-    <StyledForm onSubmit={handleSubmit(handleSumbitLogin)}>
+    <StyledForm onSubmit={handleSubmit(handleSubmitRegister)}>
       <Typography variant="h6" marginBottom={3}>
-        Login to your account
+        Register for free account
       </Typography>
+      <Input
+        id="username"
+        label="Username"
+        type="text"
+        placeholder="Vasya"
+        control={control}
+        name="username"
+        fullWidth
+      />
       <Input
         id="email"
         label="Email"
@@ -102,16 +112,16 @@ const LoginForm = ({ onLogin, isLoading, errorMessage }) => {
         sx={{ marginBottom: 8 }}
         disabled={!formState.isDirty || !formState.isValid || isLoading}
       >
-        Sign in
+        Sign Up
       </Button>
       <Stack direction="row">
         <Typography variant="subtitle2" marginRight={2}>
-          New to us?
+          Already with us?
         </Typography>
-        <NavLink to={AppRoute.REGISTRATION}>Sign Up</NavLink>
+        <NavLink to={AppRoute.LOGIN}>Sign In</NavLink>
       </Stack>
     </StyledForm>
   );
 };
 
-export { LoginForm };
+export { RegistrationForm };

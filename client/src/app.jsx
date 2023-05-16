@@ -1,7 +1,7 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { AppRoute } from 'common/enums/enums';
 import { Main } from 'components/common/common';
-import { Sign } from 'components/auth/auth';
+import { Auth } from 'components/auth/auth';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import { Route, Routes } from 'react-router-dom';
@@ -13,8 +13,8 @@ const App = () => {
       <CssBaseline />
       <Main>
         <Routes>
-          <Route path={AppRoute.LOGIN} element={<Sign />} />
-          <Route path={AppRoute.REGISTRATION} element={<Sign />} />
+          <Route path={AppRoute.LOGIN} element={<Auth />} />
+          <Route path={AppRoute.REGISTRATION} element={<Auth />} />
           <Route path={AppRoute.ANY} element={<></>} />
         </Routes>
       </Main>

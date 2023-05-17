@@ -16,8 +16,18 @@ export const authApi = baseApi.injectEndpoints({
         url: `${ApiPath.AUTH}/${AuthApiPath.REGISTER}`,
         body: payload
       })
+    }),
+    loadCurrentUser: build.query({
+      query: () => ({
+        method: HttpMethod.GET,
+        url: `${ApiPath.AUTH}/${AuthApiPath.USER}`
+      })
     })
   })
 });
 
-export const { useLoginMutation } = authApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useLoadCurrentUserQuery
+} = authApi;

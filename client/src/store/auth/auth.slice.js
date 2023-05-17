@@ -1,6 +1,6 @@
 import { createReducer, isAnyOf } from '@reduxjs/toolkit';
 import { DataStatus } from 'common/enums/enums';
-import { login, register } from './auth.actions';
+import { loadCurrentUser, login, register, logout } from './auth.actions';
 
 const initialState = {
   user: null,
@@ -14,17 +14,30 @@ const reducer = createReducer(initialState, builder => {
       state.dataStatus = DataStatus.PENDING;
     })
     .addMatcher(
-      isAnyOf(login.fulfilled, register.fulfilled),
+      isAnyOf(
+        login.fulfilled,
+        register.fulfilled,
+        logout.fulfilled,
+        loadCurrentUser.fulfilled
+      ),
       (state, action) => {
         state.user = action.payload;
         state.dataStatus = DataStatus.FULFILLED;
       }
     )
-    .addMatcher(isAnyOf(login.rejected, register.rejected), (state, action) => {
-      state.user = null;
-      state.error = action.payload;
-      state.dataStatus = DataStatus.REJECTED;
-    });
+    .addMatcher(
+      isAnyOf(
+        login.rejected,
+        logout.fulfilled,
+        register.rejected,
+        loadCurrentUser.rejected
+      ),
+      (state, action) => {
+        state.user = null;
+        state.error = action.payload;
+        state.dataStatus = DataStatus.REJECTED;
+      }
+    );
 });
 
 export { reducer };

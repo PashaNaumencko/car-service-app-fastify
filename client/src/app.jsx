@@ -1,25 +1,76 @@
-import { CssBaseline, ThemeProvider } from '@mui/material';
-import { AppRoute } from 'common/enums/enums';
-import { Main } from 'components/common/common';
+import { CircularProgress, CssBaseline, ThemeProvider } from '@mui/material';
+import { AppRoute, StorageKey } from 'common/enums/enums';
 import { Auth } from 'components/auth/auth';
+import { Main, PrivateRoute, PublicRoute } from 'components/common/common';
+import { Home } from 'components/home/home';
+import { useCallback, useEffect } from 'react';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { theme } from 'styles/theme';
+import { storage } from 'services/services';
+import { authActionCreator } from 'store/auth/auth';
 
 const App = () => {
+  const { user } = useSelector(state => ({
+    user: state.auth.user
+  }));
+  const dispatch = useDispatch();
+
+  const hasToken = Boolean(storage.getItem(StorageKey.TOKEN));
+  const hasUser = Boolean(user);
+
+  const handleUserLogout = useCallback(
+    () => dispatch(authActionCreator.logout()),
+    [dispatch]
+  );
+
+  useEffect(() => {
+    if (hasToken) {
+      dispatch(authActionCreator.loadCurrentUser());
+    }
+  }, [hasToken, dispatch]);
+
+  if (!hasUser && hasToken) {
+    return (
+      <Main>
+        <CircularProgress color="secondary" />
+      </Main>
+    );
+  }
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <>
       <Main>
         <Routes>
-          <Route path={AppRoute.LOGIN} element={<Auth />} />
-          <Route path={AppRoute.REGISTRATION} element={<Auth />} />
+          <Route
+            path={AppRoute.LOGIN}
+            element={
+              <PublicRoute>
+                <Auth />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path={AppRoute.REGISTRATION}
+            element={
+              <PublicRoute>
+                <Auth />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path={AppRoute.ROOT}
+            element={
+              <PrivateRoute>
+                <Home onLogout={handleUserLogout} />
+              </PrivateRoute>
+            }
+          />
           <Route path={AppRoute.ANY} element={<></>} />
         </Routes>
       </Main>
       <NotificationContainer />
-    </ThemeProvider>
+    </>
   );
 };
 

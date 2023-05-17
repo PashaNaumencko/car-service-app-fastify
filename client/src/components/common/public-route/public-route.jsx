@@ -1,8 +1,9 @@
 import { Navigate } from 'react-router-dom';
 import { AppRoute } from 'common/enums/enums';
+import { useSelector } from 'react-redux';
 
-const PublicRoute = ({ component: Component, ...rest }) => {
-  const { user } = {};
+const PublicRoute = ({ children, ...rest }) => {
+  const { user } = useSelector(state => ({ user: state.auth.user }));
   const hasUser = Boolean(user);
 
   return hasUser ? (
@@ -10,7 +11,7 @@ const PublicRoute = ({ component: Component, ...rest }) => {
       to={{ pathname: AppRoute.ROOT, state: { from: rest.location } }}
     />
   ) : (
-    <Component {...rest} />
+    children
   );
 };
 

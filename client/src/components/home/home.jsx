@@ -1,4 +1,5 @@
 import { Typography, Button } from '@mui/material';
+import { Workshops } from '../workshops/workshops';
 
 const Home = ({ onLogout }) => {
   return (
@@ -7,6 +8,7 @@ const Home = ({ onLogout }) => {
         Home
       </Typography>
       <Button onClick={onLogout}>Log out</Button>
+      <Workshops />
     </>
   );
 };

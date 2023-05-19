@@ -29,6 +29,8 @@ rules:
     - always
     - markers:
         - '/'
+  implicit-arrow-linebreak:
+    - off
   import/no-unresolved:
     - off
   react/jsx-indent:

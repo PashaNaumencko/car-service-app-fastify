@@ -10,9 +10,9 @@ export const palette = {
     main: '#EAF2FF'
   },
   text: {
-    primary: '#343553',
-    secondary: '#6C7B8F',
-    disabled: '#6C7B8F'
+    primary: '#000000',
+    secondary: '#666666',
+    disabled: '#A3A3A3'
   },
   success: {
     main: '#E5FBF0',
@@ -28,6 +28,7 @@ export const palette = {
     pressed: '#4C6EF5'
   },
   others: {
+    borderColor: '#E9E9E9',
     background: '#F5F7F9',
     headerBorder: '#D5D8E6',
     error: '#D52836',

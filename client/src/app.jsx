@@ -1,7 +1,7 @@
-import { CircularProgress, CssBaseline, ThemeProvider } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import { AppRoute, StorageKey } from 'common/enums/enums';
 import { Auth } from 'components/auth/auth';
-import { Main, PrivateRoute, PublicRoute } from 'components/common/common';
+import { Main, PrivateRoute, PublicRoute, Header } from 'components/common/common';
 import { Home } from 'components/home/home';
 import { useCallback, useEffect } from 'react';
 import { NotificationContainer } from 'react-notifications';
@@ -20,10 +20,7 @@ const App = () => {
   const hasToken = Boolean(storage.getItem(StorageKey.TOKEN));
   const hasUser = Boolean(user);
 
-  const handleUserLogout = useCallback(
-    () => dispatch(authActionCreator.logout()),
-    [dispatch]
-  );
+  const handleUserLogout = useCallback(() => dispatch(authActionCreator.logout()), [dispatch]);
 
   useEffect(() => {
     if (hasToken) {
@@ -31,16 +28,21 @@ const App = () => {
     }
   }, [hasToken, dispatch]);
 
-  if (!hasUser && hasToken) {
+  if (hasToken && !hasUser) {
     return (
       <Main>
-        <CircularProgress color="secondary" />
+        <CircularProgress color="primary" size={70} />
       </Main>
     );
   }
   return (
     <>
       <Main>
+        {hasUser && (
+          <header>
+            <Header onLogout={handleUserLogout} />
+          </header>
+        )}
         <Routes>
           <Route
             path={AppRoute.LOGIN}

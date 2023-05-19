@@ -8,7 +8,7 @@ import { DEFAULT_USER_AVATAR } from 'common/constants/constants';
 import { useState } from 'react';
 import { StyledAppBar } from './header.styles';
 
-const Header = ({ isDrawerOpen, onDrawerOpen, onLogout }) => {
+const Header = ({ isSideMenuOpen, onSideMenuOpen, onLogout }) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = event => {
@@ -20,15 +20,16 @@ const Header = ({ isDrawerOpen, onDrawerOpen, onLogout }) => {
   };
 
   return (
-    <StyledAppBar position="fixed" isDrawerOpen={isDrawerOpen}>
+    <StyledAppBar position="fixed" isSideMenuOpen={isSideMenuOpen}>
       <Toolbar>
         <IconButton
           color="inherit"
           aria-label="open drawer"
-          onClick={onDrawerOpen}
+          onClick={onSideMenuOpen}
           edge="start"
           sx={{
-            ...(isDrawerOpen && { display: 'none' })
+            ...(isSideMenuOpen && { display: 'none' }),
+            marginLeft: -1.5
           }}
         >
           <MenuIcon />
@@ -41,7 +42,7 @@ const Header = ({ isDrawerOpen, onDrawerOpen, onLogout }) => {
 
         <Box sx={{ flexGrow: 0 }}>
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" src={DEFAULT_USER_AVATAR} />
+            <Avatar alt="Avatar Icon" src={DEFAULT_USER_AVATAR} />
           </IconButton>
           <Menu
             sx={{ mt: '45px' }}

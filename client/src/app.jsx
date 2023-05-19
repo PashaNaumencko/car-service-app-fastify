@@ -1,9 +1,9 @@
 import { CircularProgress } from '@mui/material';
 import { AppRoute, StorageKey } from 'common/enums/enums';
 import { Auth } from 'components/auth/auth';
-import { Main, PrivateRoute, PublicRoute, Header } from 'components/common/common';
+import { Main, PrivateRoute, PublicRoute, Header, SideMenu } from 'components/common/common';
 import { Home } from 'components/home/home';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,11 +16,20 @@ const App = () => {
     user: state.auth.user
   }));
   const dispatch = useDispatch();
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   const hasToken = Boolean(storage.getItem(StorageKey.TOKEN));
   const hasUser = Boolean(user);
 
   const handleUserLogout = useCallback(() => dispatch(authActionCreator.logout()), [dispatch]);
+
+  const handleSideMenuOpen = useCallback(() => {
+    setIsSideMenuOpen(true);
+  }, []);
+
+  const handleSideMenuClose = useCallback(() => {
+    setIsSideMenuOpen(false);
+  }, []);
 
   useEffect(() => {
     if (hasToken) {
@@ -40,7 +49,12 @@ const App = () => {
       <Main>
         {hasUser && (
           <header>
-            <Header onLogout={handleUserLogout} />
+            <Header
+              onLogout={handleUserLogout}
+              isSideMenuOpen={isSideMenuOpen}
+              onSideMenuOpen={handleSideMenuOpen}
+            />
+            <SideMenu isOpen={isSideMenuOpen} onClose={handleSideMenuClose} />
           </header>
         )}
         <Routes>

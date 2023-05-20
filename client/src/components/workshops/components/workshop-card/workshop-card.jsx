@@ -4,7 +4,7 @@ import { AppRoute } from 'common/enums/enums';
 import { Image } from 'components/common/common';
 import { StyledCard, StyledCardContent, StyledWorkshopLink } from './workshop-card.styles';
 
-const WorkshopCard = () => {
+const WorkshopCard = ({ onOpenOrderForm }) => {
   return (
     <StyledCard>
       <StyledCardContent>
@@ -46,7 +46,7 @@ const WorkshopCard = () => {
               of those fluids) - Brake system repair - Engine diagnostics and repair -Endoscopy of
               engine cylinders
             </Typography>
-            <Button size="large" variant="outlined" color="primary">
+            <Button size="large" variant="outlined" color="primary" onClick={onOpenOrderForm}>
               Book visit
             </Button>
           </Stack>

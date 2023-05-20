@@ -5,3 +5,4 @@ export { UseFormMode } from './form/form.js';
 export { ExceptionMessage } from './exception/exception.js';
 export { NotificationMessage, NotificationType } from './notifications/notifications.js';
 export { ImageSize } from './components/components.js';
+export { ModalVariant } from './modals/modals.js';

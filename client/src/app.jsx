@@ -3,6 +3,7 @@ import { AppRoute, StorageKey } from 'common/enums/enums';
 import { Auth } from 'components/auth/auth';
 import { Main, PrivateRoute, PublicRoute, Header, SideMenu } from 'components/common/common';
 import { Home } from 'components/home/home';
+import { Modals } from 'components/modals/modals';
 import { Workshop } from 'components/workshop/workshop';
 import { useCallback, useEffect, useState } from 'react';
 import { NotificationContainer } from 'react-notifications';
@@ -95,6 +96,7 @@ const App = () => {
         </Routes>
       </Main>
       <NotificationContainer />
+      <Modals />
     </>
   );
 };

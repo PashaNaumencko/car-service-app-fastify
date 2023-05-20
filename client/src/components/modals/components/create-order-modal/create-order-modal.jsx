@@ -1,10 +1,11 @@
 import {
-  CancelRounded as CancelRoundedIcon,
-  ArrowCircleLeftRounded as ArrowCircleLeftRoundedIcon
+  ArrowCircleLeftRounded as ArrowCircleLeftRoundedIcon,
+  CancelRounded as CancelRoundedIcon
 } from '@mui/icons-material';
 import { Dialog, DialogContent, Typography } from '@mui/material';
 import { useModal } from 'hooks/hooks';
-import { StyledModalHeader, StyledIconButton, ButtonDirection } from './create-order-modal.styles';
+import { CreateOrderForm } from './components/components';
+import { ButtonDirection, StyledIconButton, StyledModalHeader } from './create-order-modal.styles';
 
 const CreateOrderModal = () => {
   const { handleClose } = useModal();
@@ -24,7 +25,9 @@ const CreateOrderModal = () => {
         </StyledIconButton>
       </StyledModalHeader>
 
-      <DialogContent></DialogContent>
+      <DialogContent>
+        <CreateOrderForm />
+      </DialogContent>
     </Dialog>
   );
 };

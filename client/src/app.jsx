@@ -1,4 +1,4 @@
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Stack } from '@mui/material';
 import { AppRoute, StorageKey } from 'common/enums/enums';
 import { Auth } from 'components/auth/auth';
 import { Main, PrivateRoute, PublicRoute, Header, SideMenu } from 'components/common/common';
@@ -40,9 +40,9 @@ const App = () => {
 
   if (hasToken && !hasUser) {
     return (
-      <Main>
+      <Stack justifyContent="center" alignItems="center" height="100vh">
         <CircularProgress color="primary" size={70} />
-      </Main>
+      </Stack>
     );
   }
   return (

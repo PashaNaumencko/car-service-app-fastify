@@ -1,8 +1,7 @@
-import { Grid, Card, CardContent, Button, Typography, Stack } from '@mui/material';
-import { LocalPhone as LocalPhoneIcon, Link as LinkIcon } from '@mui/icons-material';
+import { Grid, Typography } from '@mui/material';
 import { Image } from 'components/common/common';
-import { StyledLeftSideWrapper, ContactsIconWrapper } from './workshop.styles';
-import { Services } from './components/components';
+import { StyledLeftSideWrapper } from './workshop.styles';
+import { Services, ContactsCard } from './components/components';
 
 const Workshop = () => {
   return (
@@ -12,6 +11,7 @@ const Workshop = () => {
           <Image
             borderRadius={5}
             width={723}
+            // eslint-disable-next-line max-len
             src="https://res.cloudinary.com/intercars/image/upload/c_scale,w_800,f_auto,q_auto/v1662642239/workshops_prod2/kzpmbqz9/2315558175.jpg.jpg"
           />
           <Typography variant="h2" marginTop={4} marginBottom={3}>
@@ -35,56 +35,7 @@ const Workshop = () => {
         </StyledLeftSideWrapper>
       </Grid>
       <Grid item xs={4}>
-        <Card>
-          <CardContent sx={{ padding: 4 }}>
-            <Typography variant="h2" marginBottom={3}>
-              TEC-SERVICE
-            </Typography>
-            <Typography variant="body2" color="text.secondary" marginBottom={3}>
-              Maksymovycha 18, Vinnyts'ka city council, 21012 Vinnytsia
-            </Typography>
-            <Button
-              fullWidth
-              color="primary"
-              variant="contained"
-              sx={{ textTransform: 'uppercase', marginBottom: 6 }}
-            >
-              Book Visit
-            </Button>
-            <Typography variant="h6" marginBottom={3}>
-              Contant us
-            </Typography>
-
-            <Stack direction="row" alignItems="center" marginBottom={3}>
-              <ContactsIconWrapper>
-                <LocalPhoneIcon />
-              </ContactsIconWrapper>
-              <Typography
-                variant="body2"
-                color="text.primary"
-                as="a"
-                href="tel:+380674502686"
-                sx={{ textDecoration: 'none' }}
-              >
-                +380 67 450 2686
-              </Typography>
-            </Stack>
-            <Stack direction="row" alignItems="center">
-              <ContactsIconWrapper>
-                <LinkIcon />
-              </ContactsIconWrapper>
-              <Typography
-                variant="body2"
-                color="text.primary"
-                as="a"
-                href="https://tec-service.weblium.site/"
-                sx={{ textDecoration: 'none' }}
-              >
-                Web
-              </Typography>
-            </Stack>
-          </CardContent>
-        </Card>
+        <ContactsCard />
       </Grid>
     </Grid>
   );

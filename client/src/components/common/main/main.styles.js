@@ -6,7 +6,9 @@ export const ViewportContainer = styled(Box)(({ theme }) => ({
   overflow: 'auto'
 }));
 
-export const StyledContainer = styled(Container)(({ hasHeader }) => ({
+export const StyledContainer = styled(Container, {
+  shouldForwardProp: prop => prop !== 'hasHeader'
+})(({ hasHeader }) => ({
   paddingTop: hasHeader ? '64px' : 0,
   display: 'flex',
   justifyContent: 'center',

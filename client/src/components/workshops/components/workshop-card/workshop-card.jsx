@@ -1,23 +1,21 @@
 import { LocalPhone as LocalPhoneIcon } from '@mui/icons-material';
 import { Button, Stack, Typography } from '@mui/material';
-import {
-  StyledCard,
-  StyledCardContent,
-  StyledWorkshopLink,
-  StyledWorkshopImage
-} from './workshop.styles';
+import { AppRoute } from 'common/enums/enums';
+import { Image } from 'components/common/common';
+import { StyledCard, StyledCardContent, StyledWorkshopLink } from './workshop-card.styles';
 
-const Workshop = () => {
+const WorkshopCard = () => {
   return (
     <StyledCard>
       <StyledCardContent>
-        <StyledWorkshopImage
-          loading="lazy"
+        <Image
+          width={260}
+          borderRadius={5}
           // eslint-disable-next-line max-len
           src="https://res.cloudinary.com/intercars/image/upload/c_fit,h_400,w_400,f_auto,q_auto/v1666014168/workshops_prod2/v26vx2xm/IMG_20201208_152840_1666014164656.jpg"
         />
         <Stack direction="column" gap={2}>
-          <StyledWorkshopLink>
+          <StyledWorkshopLink to={`${AppRoute.WORKSHOP}/11`}>
             <Typography variant="h6">Workshop Name</Typography>
           </StyledWorkshopLink>
           <Typography variant="body2" color="text.secondary">
@@ -48,7 +46,7 @@ const Workshop = () => {
               of those fluids) - Brake system repair - Engine diagnostics and repair -Endoscopy of
               engine cylinders
             </Typography>
-            <Button size="large" variant="contained" color="primary">
+            <Button size="large" variant="outlined" color="primary">
               Book visit
             </Button>
           </Stack>
@@ -58,4 +56,4 @@ const Workshop = () => {
   );
 };
 
-export { Workshop };
+export { WorkshopCard };

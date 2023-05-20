@@ -1,9 +1,11 @@
 import { StyledContainer, ViewportContainer } from './main.styles';
 
-const Main = ({ children }) => {
+const Main = ({ children, hasHeader }) => {
   return (
     <ViewportContainer>
-      <StyledContainer fixed>{children}</StyledContainer>
+      <StyledContainer fixed hasHeader={hasHeader}>
+        {children}
+      </StyledContainer>
     </ViewportContainer>
   );
 };

@@ -20,7 +20,7 @@ const Header = ({ isSideMenuOpen, onSideMenuOpen, onLogout }) => {
   };
 
   return (
-    <StyledAppBar position="fixed" isSideMenuOpen={isSideMenuOpen}>
+    <StyledAppBar isSideMenuOpen={isSideMenuOpen}>
       <Toolbar>
         <IconButton
           color="inherit"

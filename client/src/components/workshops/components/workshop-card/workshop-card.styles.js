@@ -1,16 +1,10 @@
 import { styled, Card, CardContent } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
-export const StyledWorkshopImage = styled('img')`
-  width: 260px;
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
-`;
-
 export const StyledWorkshopLink = styled(NavLink)`
   text-decoration: none;
   display: block;
+  color: initial;
 
   &:visited {
     text-decoration: none;

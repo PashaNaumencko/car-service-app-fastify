@@ -1,26 +1,23 @@
-import { ImageSize } from 'common/enums/enums';
-
-import { StyledImage } from './image.styles';
+import { StyledImage, StyledImageWrapper } from './image.styles';
 
 const Image = ({
   alt,
   isCentered = false,
   isCircular = false,
   height,
-  size = ImageSize.SMALL,
   src,
-  width
+  width,
+  borderRadius
 }) => (
-  <StyledImage
-    isCentered={isCentered}
-    isCircular={isCircular}
-    size={size}
+  <StyledImageWrapper
     width={width}
     height={height}
-    src={src}
-    alt={alt}
-    loading="lazy"
-  />
+    isCentered={isCentered}
+    isCircular={isCircular}
+    borderRadius={borderRadius}
+  >
+    <StyledImage src={src} alt={alt} loading="lazy" />
+  </StyledImageWrapper>
 );
 
 export { Image };

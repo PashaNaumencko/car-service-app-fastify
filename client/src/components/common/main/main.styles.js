@@ -1,13 +1,13 @@
 import { Box, Container, styled } from '@mui/material';
 
 export const ViewportContainer = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  height: 'calc(100vh - 56px)',
-  minHeight: '450px',
-  background: theme.palette.others.background
+  height: '100vh',
+  background: theme.palette.others.background,
+  overflow: 'auto'
 }));
 
-export const StyledContainer = styled(Container)(() => ({
+export const StyledContainer = styled(Container)(({ hasHeader }) => ({
+  paddingTop: hasHeader ? '64px' : 0,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center'

@@ -3,6 +3,7 @@ import { AppRoute, StorageKey } from 'common/enums/enums';
 import { Auth } from 'components/auth/auth';
 import { Main, PrivateRoute, PublicRoute, Header, SideMenu } from 'components/common/common';
 import { Home } from 'components/home/home';
+import { Workshop } from 'components/workshop/workshop';
 import { useCallback, useEffect, useState } from 'react';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
@@ -46,17 +47,17 @@ const App = () => {
   }
   return (
     <>
-      <Main>
-        {hasUser && (
-          <header>
-            <Header
-              onLogout={handleUserLogout}
-              isSideMenuOpen={isSideMenuOpen}
-              onSideMenuOpen={handleSideMenuOpen}
-            />
-            <SideMenu isOpen={isSideMenuOpen} onClose={handleSideMenuClose} />
-          </header>
-        )}
+      {hasUser && (
+        <>
+          <Header
+            onLogout={handleUserLogout}
+            isSideMenuOpen={isSideMenuOpen}
+            onSideMenuOpen={handleSideMenuOpen}
+          />
+          <SideMenu isOpen={isSideMenuOpen} onClose={handleSideMenuClose} />
+        </>
+      )}
+      <Main hasHeader={hasUser}>
         <Routes>
           <Route
             path={AppRoute.LOGIN}
@@ -79,6 +80,14 @@ const App = () => {
             element={
               <PrivateRoute>
                 <Home onLogout={handleUserLogout} />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.WORKSHOP_$ID}
+            element={
+              <PrivateRoute>
+                <Workshop />
               </PrivateRoute>
             }
           />

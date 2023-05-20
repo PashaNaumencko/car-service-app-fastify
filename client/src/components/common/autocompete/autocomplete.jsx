@@ -1,7 +1,13 @@
-import { Autocomplete as MuiAutocomplete, TextField, Checkbox } from '@mui/material';
+import {
+  Autocomplete as MuiAutocomplete,
+  TextField,
+  Checkbox,
+  InputAdornment
+} from '@mui/material';
 import {
   CheckBoxOutlineBlank as CheckBoxOutlineBlankIcon,
-  CheckBox as CheckBoxIcon
+  CheckBox as CheckBoxIcon,
+  SearchRounded as SearchRoundedIcon
 } from '@mui/icons-material';
 import { useController } from 'react-hook-form';
 
@@ -41,7 +47,19 @@ const Autocomplete = ({
       )}
       style={{ width: paperWidth }}
       renderInput={params => (
-        <TextField {...params} label="Selected value" placeholder={placeholder} />
+        <TextField
+          {...params}
+          label="Selected value"
+          // placeholder={placeholder}
+          InputProps={{
+            ...params.InputProps,
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchRoundedIcon color="primary" />
+              </InputAdornment>
+            )
+          }}
+        />
       )}
     />
   );

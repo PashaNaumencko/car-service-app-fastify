@@ -2,6 +2,8 @@ import { useController } from 'react-hook-form';
 import { FormControl, TextField } from '@mui/material';
 import { StyledLabel } from './input.styles';
 
+const MIN_INPUT_WIDTH = 185;
+
 const Input = ({
   id,
   name,
@@ -10,7 +12,9 @@ const Input = ({
   placeholder,
   type,
   endAdornment,
-  fullWidth
+  rows,
+  fullWidth,
+  width = MIN_INPUT_WIDTH
 }) => {
   const {
     field,
@@ -25,17 +29,15 @@ const Input = ({
   };
 
   return (
-    <FormControl
-      fullWidth={fullWidth}
-      variant="standard"
-      sx={{ marginBottom: 6.5 }}
-    >
+    <FormControl fullWidth={fullWidth} variant="standard" sx={{ marginBottom: 6.5, width }}>
       <StyledLabel shrink htmlFor={id}>
         {label}
       </StyledLabel>
       <TextField
         id={id}
         placeholder={placeholder}
+        multiline={Boolean(rows)}
+        rows={rows}
         autoComplete="off"
         type={type}
         value={field.value}

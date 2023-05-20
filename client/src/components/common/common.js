@@ -1,3 +1,4 @@
+export { Autocomplete } from './autocompete/autocomplete';
 export { Header } from './header/header';
 export { Image } from './image/image';
 export { Input } from './input/input';

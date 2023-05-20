@@ -1,12 +1,12 @@
 import { Box, Dialog, DialogContent, Typography } from '@mui/material';
-import { Select } from 'components/common/common';
+import { Select, Autocomplete } from 'components/common/common';
 import { mapDataToOptions } from 'helpers/helpers';
 import { useAppForm } from 'hooks/hooks';
-import { carBrands } from './mockData';
+import { carBrands, services } from './mockData';
 
 const DEFAULT_CREATE_ORDER_FORM_PAYLOAD = {
   carBrand: '',
-  password: ''
+  services: []
 };
 
 const CreateOrderForm = () => {
@@ -23,6 +23,13 @@ const CreateOrderForm = () => {
         control={control}
         name="brand"
         options={mapDataToOptions(carBrands, 'fullName')}
+        paperWidth={500}
+      />
+      <Autocomplete
+        control={control}
+        name="services"
+        options={services}
+        displayedLabelName="name"
         paperWidth={500}
       />
     </Box>

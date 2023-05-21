@@ -2,14 +2,14 @@ import {
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon
 } from '@mui/icons-material';
-import { Box, Button, IconButton, InputAdornment, Stack, Typography } from '@mui/material';
+import { Box, Button, IconButton, InputAdornment, Divider, Typography } from '@mui/material';
 import { Input } from 'components/common/common';
 import { AppRoute } from 'common/enums/enums.js';
 import { useAppForm } from 'hooks/hooks.js';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { registration as registrationValidationSchema } from 'validation-schemas/validation-schemas.js';
-import { StyledForm } from '../../sign.styles';
+import { StyledForm } from '../../auth.styles';
 
 const DEFAULT_REGISTRATION_PAYLOAD = {
   username: '',
@@ -38,8 +38,8 @@ const RegistrationForm = ({ onRegister, errorMessage, isLoading }) => {
 
   return (
     <StyledForm onSubmit={handleSubmit(handleSubmitRegister)}>
-      <Typography variant="h6" marginBottom={3}>
-        Register for free account
+      <Typography variant="h6" marginBottom={8}>
+        Створити новий аккаунт
       </Typography>
       <Input
         id="username"
@@ -105,17 +105,18 @@ const RegistrationForm = ({ onRegister, errorMessage, isLoading }) => {
         variant="contained"
         fullWidth
         type="submit"
-        sx={{ marginBottom: 8 }}
+        sx={{ marginBottom: 8, width: 400 }}
         disabled={!formState.isDirty || !formState.isValid || isLoading}
       >
-        Sign Up
+        Зареєструватися
       </Button>
-      <Stack direction="row">
-        <Typography variant="subtitle2" marginRight={2}>
-          Already with us?
-        </Typography>
-        <NavLink to={AppRoute.LOGIN}>Sign In</NavLink>
-      </Stack>
+      <NavLink to={AppRoute.LOGIN}>
+        <Typography variant="subtitle1">Увійти до платформи</Typography>
+      </NavLink>
+      <Divider sx={{ marginBottom: 3, marginTop: 3, width: '100%' }}>Або</Divider>
+      <NavLink to={AppRoute.WORKSHOP_REGISTRATION}>
+        <Typography variant="subtitle1">Зареєструвати нову майстерню</Typography>
+      </NavLink>
     </StyledForm>
   );
 };

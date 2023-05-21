@@ -1,12 +1,13 @@
-import { Typography } from '@mui/material';
+import { Typography, Divider, Stack } from '@mui/material';
 import { AppRoute, DataStatus } from 'common/enums/enums';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, NavLink } from 'react-router-dom';
 import { authActionCreator } from 'store/auth/auth';
 import { LoginForm } from './components/login-form/login-form';
-import { StyledLoginFormContainer } from './sign.styles';
+import { StyledLoginFormContainer } from './auth.styles';
 import { RegistrationForm } from './components/registration-form/registration-form';
+import { WorkshopRegistrationForm } from './components/workshop-registration-form/workshop-registration-form';
 
 const Auth = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,9 @@ const Auth = () => {
             errorMessage={error}
           />
         );
+      }
+      case AppRoute.WORKSHOP_REGISTRATION: {
+        return <WorkshopRegistrationForm onRegisterWorkshop={() => {}} />;
       }
       default: {
         return null;

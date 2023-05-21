@@ -5,6 +5,7 @@ const AppRoute = {
   ANY: '*',
   LOGIN: '/login',
   REGISTRATION: '/registration',
+  WORKSHOP_REGISTRATION: '/workshop-registration',
   ORDERS: '/orders'
 };
 

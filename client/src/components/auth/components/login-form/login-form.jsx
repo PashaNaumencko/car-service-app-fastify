@@ -2,14 +2,14 @@ import {
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon
 } from '@mui/icons-material';
-import { Box, Stack, Button, IconButton, InputAdornment, Typography } from '@mui/material';
+import { Box, Button, IconButton, InputAdornment, Typography, Divider } from '@mui/material';
 import { Input } from 'components/common/common';
 import { AppRoute } from 'common/enums/enums';
 import { useAppForm } from 'hooks/hooks';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { login as loginValidationSchema } from 'validation-schemas/validation-schemas.js';
-import { StyledForm } from '../../sign.styles';
+import { StyledForm } from '../../auth.styles';
 
 const DEFAULT_LOGIN_FORM_PAYLOAD = {
   email: '',
@@ -37,8 +37,8 @@ const LoginForm = ({ onLogin, isLoading, errorMessage }) => {
 
   return (
     <StyledForm onSubmit={handleSubmit(handleSumbitLogin)}>
-      <Typography variant="h6" marginBottom={3}>
-        Login to your account
+      <Typography variant="h6" marginBottom={8}>
+        Увійти до аккаунту
       </Typography>
       <Input
         id="email"
@@ -94,17 +94,19 @@ const LoginForm = ({ onLogin, isLoading, errorMessage }) => {
         variant="contained"
         fullWidth
         type="submit"
-        sx={{ marginBottom: 8 }}
+        sx={{ marginBottom: 8, width: 400 }}
         disabled={!formState.isDirty || !formState.isValid || isLoading}
       >
-        Sign in
+        Увійти
       </Button>
-      <Stack direction="row">
-        <Typography variant="subtitle2" marginRight={2}>
-          New to us?
-        </Typography>
-        <NavLink to={AppRoute.REGISTRATION}>Sign Up</NavLink>
-      </Stack>
+
+      <NavLink to={AppRoute.REGISTRATION}>
+        <Typography variant="subtitle1">Зареєструватися</Typography>
+      </NavLink>
+      <Divider sx={{ marginBottom: 3, marginTop: 3, width: '100%' }}>Або</Divider>
+      <NavLink to={AppRoute.WORKSHOP_REGISTRATION}>
+        <Typography variant="subtitle1">Зареєструвати нову майстерню</Typography>
+      </NavLink>
     </StyledForm>
   );
 };

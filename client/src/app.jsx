@@ -77,6 +77,14 @@ const App = () => {
             }
           />
           <Route
+            path={AppRoute.WORKSHOP_REGISTRATION}
+            element={
+              <PublicRoute>
+                <Auth />
+              </PublicRoute>
+            }
+          />
+          <Route
             path={AppRoute.ROOT}
             element={
               <PrivateRoute>

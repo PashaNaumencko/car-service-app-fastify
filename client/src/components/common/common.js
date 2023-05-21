@@ -1,4 +1,5 @@
 export { Autocomplete } from './autocompete/autocomplete';
+export { DatePicker } from './date-picker/date-picker';
 export { Header } from './header/header';
 export { Image } from './image/image';
 export { Input } from './input/input';

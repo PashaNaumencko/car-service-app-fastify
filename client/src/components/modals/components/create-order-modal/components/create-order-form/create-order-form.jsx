@@ -1,7 +1,7 @@
 import { Box, Button, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { useAppForm, useStepper } from 'hooks/hooks';
 import { FormProvider } from 'react-hook-form';
-import { ChooseServiceStep, FillCarInfo } from './components/components';
+import { ChooseServiceStep, FillCarInfo, ChooseVisitDate } from './components/components';
 import { CREATE_ORDER_FORM_STEPS, DEFAULT_CREATE_ORDER_FORM_PAYLOAD } from './constants';
 import { carBrands, services } from './mockData';
 
@@ -26,7 +26,7 @@ const CreateOrderForm = () => {
         </Stepper>
         {activeStep === 0 ? <ChooseServiceStep services={services} /> : null}
         {activeStep === 1 ? <FillCarInfo carBrands={carBrands} /> : null}
-        {activeStep === 2 ? <Stack direction="column" alignItems="center"></Stack> : null}
+        {activeStep === 2 ? <ChooseVisitDate /> : null}
       </Box>
     </FormProvider>
   );

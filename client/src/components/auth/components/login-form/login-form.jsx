@@ -2,14 +2,7 @@ import {
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon
 } from '@mui/icons-material';
-import {
-  Box,
-  Stack,
-  Button,
-  IconButton,
-  InputAdornment,
-  Typography
-} from '@mui/material';
+import { Box, Stack, Button, IconButton, InputAdornment, Typography } from '@mui/material';
 import { Input } from 'components/common/common';
 import { AppRoute } from 'common/enums/enums';
 import { useAppForm } from 'hooks/hooks';
@@ -55,6 +48,7 @@ const LoginForm = ({ onLogin, isLoading, errorMessage }) => {
         control={control}
         name="email"
         fullWidth
+        width={350}
       />
       <Input
         id="password"
@@ -64,6 +58,7 @@ const LoginForm = ({ onLogin, isLoading, errorMessage }) => {
         control={control}
         name="password"
         fullWidth
+        width={350}
         endAdornment={
           <InputAdornment position="end">
             <IconButton

@@ -18,6 +18,7 @@ const Autocomplete = ({
   control,
   options,
   displayedLabelName,
+  label = '',
   placeholder = 'Enter value',
   paperWidth = MIN_AUTOCOMPLETE_PAPER_WIDTH
 }) => {
@@ -49,8 +50,8 @@ const Autocomplete = ({
       renderInput={params => (
         <TextField
           {...params}
-          label="Selected value"
-          // placeholder={placeholder}
+          label={label}
+          placeholder={placeholder}
           InputProps={{
             ...params.InputProps,
             startAdornment: (

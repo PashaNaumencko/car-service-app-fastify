@@ -2,14 +2,7 @@ import {
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon
 } from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  IconButton,
-  InputAdornment,
-  Stack,
-  Typography
-} from '@mui/material';
+import { Box, Button, IconButton, InputAdornment, Stack, Typography } from '@mui/material';
 import { Input } from 'components/common/common';
 import { AppRoute } from 'common/enums/enums.js';
 import { useAppForm } from 'hooks/hooks.js';
@@ -55,6 +48,7 @@ const RegistrationForm = ({ onRegister, errorMessage, isLoading }) => {
         placeholder="Vasya"
         control={control}
         name="username"
+        width={350}
         fullWidth
       />
       <Input
@@ -64,6 +58,7 @@ const RegistrationForm = ({ onRegister, errorMessage, isLoading }) => {
         placeholder="example@gmail.com"
         control={control}
         name="email"
+        width={350}
         fullWidth
       />
       <Input
@@ -73,6 +68,7 @@ const RegistrationForm = ({ onRegister, errorMessage, isLoading }) => {
         placeholder="••••••"
         control={control}
         name="password"
+        width={350}
         fullWidth
         endAdornment={
           <InputAdornment position="end">

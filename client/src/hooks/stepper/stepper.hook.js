@@ -1,26 +1,13 @@
-import { useState, useCallback } from 'react';
+import { StepperContext } from 'contexts/contexts';
+import { useContext } from 'react';
 
 const useStepper = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const context = useContext(StepperContext);
+  if (!context) {
+    throw new Error('useStepper must be used within StepperProvider');
+  }
 
-  const handleNext = useCallback(() => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
-  }, []);
-
-  const handleBack = useCallback(() => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
-  }, []);
-
-  const handleReset = useCallback(() => {
-    setActiveStep(0);
-  }, []);
-
-  return {
-    activeStep,
-    handleNext,
-    handleBack,
-    handleReset
-  };
+  return context;
 };
 
 export { useStepper };

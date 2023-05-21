@@ -54,7 +54,7 @@ const Auth = () => {
 
   return (
     <StyledLoginFormContainer elevation={0}>
-      <Typography variant="h4" marginBottom={10}>
+      <Typography variant="h4" marginBottom={10} align="center">
         Welcome to Car Service App!
       </Typography>
       {getScreen(pathname)}

@@ -10,6 +10,7 @@ export const StyledContainer = styled(Container, {
   shouldForwardProp: prop => prop !== 'hasHeader'
 })(({ hasHeader }) => ({
   paddingTop: hasHeader ? '64px' : 0,
+  height: hasHeader ? 'initial' : '100%',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center'

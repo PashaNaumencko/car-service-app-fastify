@@ -6,28 +6,24 @@ export const authApi = baseApi.injectEndpoints({
     login: build.mutation({
       query: payload => ({
         method: HttpMethod.POST,
-        url: `${ApiPath.AUTH}/${AuthApiPath.LOGIN}`,
+        url: `${ApiPath.AUTH}${AuthApiPath.LOGIN}`,
         body: payload
       })
     }),
     register: build.mutation({
       query: payload => ({
         method: HttpMethod.POST,
-        url: `${ApiPath.AUTH}/${AuthApiPath.REGISTER}`,
+        url: `${ApiPath.AUTH}${AuthApiPath.REGISTER}`,
         body: payload
       })
     }),
     loadCurrentUser: build.query({
       query: () => ({
         method: HttpMethod.GET,
-        url: `${ApiPath.AUTH}/${AuthApiPath.USER}`
+        url: `${ApiPath.AUTH}${AuthApiPath.USER}`
       })
     })
   })
 });
 
-export const {
-  useLoginMutation,
-  useRegisterMutation,
-  useLoadCurrentUserQuery
-} = authApi;
+export const { useLoginMutation, useRegisterMutation, useLoadCurrentUserQuery } = authApi;

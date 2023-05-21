@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
 import { ModalVariant } from 'common/enums/enums';
+import { StepperProvider } from 'contexts/contexts';
 import { useModal } from 'hooks/hooks';
+import { useMemo } from 'react';
 import { CreateOrderModal } from './components/components';
 
 const Modals = () => {
@@ -8,7 +9,11 @@ const Modals = () => {
 
   const modalsByVariant = useMemo(
     () => ({
-      [ModalVariant.CREATE_ORDER]: <CreateOrderModal />,
+      [ModalVariant.CREATE_ORDER]: (
+        <StepperProvider>
+          <CreateOrderModal />
+        </StepperProvider>
+      ),
       DEFAULT: null
     }),
     []

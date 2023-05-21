@@ -8,7 +8,7 @@ import { CreateOrderForm } from './components/components';
 import { ButtonDirection, StyledIconButton, StyledModalHeader } from './create-order-modal.styles';
 
 const CreateOrderModal = () => {
-  const { activeStep, handleNext, handleBack } = useStepper();
+  const { activeStep, handleBack } = useStepper();
   const { handleClose } = useModal();
 
   return (
@@ -29,7 +29,7 @@ const CreateOrderModal = () => {
       </StyledModalHeader>
 
       {/* <DialogContent sx={{ padding: '16px' }}> */}
-      <CreateOrderForm activeStep={activeStep} onNextStep={handleNext} />
+      <CreateOrderForm />
       {/* </DialogContent> */}
     </Dialog>
   );

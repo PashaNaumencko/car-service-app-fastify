@@ -17,5 +17,6 @@ export const StyledForm = styled('form')(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   flex: 1,
-  padding: theme.spacing(0, 15)
+  padding: theme.spacing(0, 15),
+  minWidth: 600
 }));

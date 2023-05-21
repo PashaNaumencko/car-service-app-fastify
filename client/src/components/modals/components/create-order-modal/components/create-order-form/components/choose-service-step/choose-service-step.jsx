@@ -1,18 +1,18 @@
 import { Box, Typography, Stack, Button } from '@mui/material';
-import { Select, Autocomplete, Input } from 'components/common/common';
+import { Autocomplete, Input } from 'components/common/common';
 import { useFormContext } from 'react-hook-form';
 import { useStepper } from 'hooks/hooks';
 
 const ChooseServiceStep = ({ services }) => {
   const { control } = useFormContext();
-  const { onNextStep } = useStepper();
+  const { handleNext } = useStepper();
 
   return (
     <Stack direction="column" alignItems="center">
-      <Typography variant="h2" color="primary">
+      <Typography variant="h2" color="primary" marginBottom={1}>
         Вітаємо!
       </Typography>
-      <Typography variant="h2" marginBottom={4}>
+      <Typography variant="h2" marginBottom={16}>
         Що потрібно вашому автомобілю?
       </Typography>
       <Box sx={{ marginBottom: 6 }}>
@@ -37,7 +37,7 @@ const ChooseServiceStep = ({ services }) => {
         variant="contained"
         color="primary"
         fullWidth
-        onClick={onNextStep}
+        onClick={handleNext}
         sx={{ textTransform: 'uppercase', maxWidth: 500, marginTop: 3 }}
       >
         Далі

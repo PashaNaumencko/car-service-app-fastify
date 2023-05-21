@@ -7,3 +7,4 @@ export { PrivateRoute } from './private-route/private-route';
 export { PublicRoute } from './public-route/public-route';
 export { Select } from './select/select';
 export { SideMenu } from './side-menu/side-menu';
+export { YearField } from './year-field/year-field';

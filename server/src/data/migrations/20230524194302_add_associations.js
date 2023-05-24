@@ -1,14 +1,22 @@
 const TableName = {
   USERS: 'users',
+  IMAGES: 'images',
   WORKSHOPS: 'workshops',
-  IMAGES: 'images'
+  ORDERS: 'orders',
+  CARS: 'cars',
+  SERVICES: 'services',
+  ORDERS_TO_SERVICES: 'orders_to_services'
 };
 
 const ColumnName = {
   ID: 'id',
   IMAGE_ID: 'image_id',
   WORKSHOP_ID: 'workshop_id',
-  ADMIN_ID: 'admin_id'
+  ADMIN_ID: 'admin_id',
+  USER_ID: 'user_id',
+  CAR_ID: 'car_id',
+  SERVICE_ID: 'service_id',
+  ORDER_ID: 'order_id'
 };
 
 const RelationRule = {
@@ -28,6 +36,42 @@ export async function up(knex) {
       .integer(ColumnName.ADMIN_ID)
       .references(ColumnName.ID)
       .inTable(TableName.USERS)
+      .onUpdate(RelationRule.CASCADE)
+      .onDelete(RelationRule.SET_NULL);
+  });
+
+  await knex.schema.alterTable(TableName.ORDERS, table => {
+    table
+      .integer(ColumnName.WORKSHOP_ID)
+      .references(ColumnName.ID)
+      .inTable(TableName.WORKSHOPS)
+      .onUpdate(RelationRule.CASCADE)
+      .onDelete(RelationRule.SET_NULL);
+    table
+      .integer(ColumnName.USER_ID)
+      .references(ColumnName.ID)
+      .inTable(TableName.USERS)
+      .onUpdate(RelationRule.CASCADE)
+      .onDelete(RelationRule.SET_NULL);
+    table
+      .integer(ColumnName.CAR_ID)
+      .references(ColumnName.ID)
+      .inTable(TableName.CARS)
+      .onUpdate(RelationRule.CASCADE)
+      .onDelete(RelationRule.SET_NULL);
+    table
+      .integer(ColumnName.SERVICE_ID)
+      .references(ColumnName.SERVICE_ID)
+      .inTable(TableName.ORDERS_TO_SERVICES)
+      .onUpdate(RelationRule.CASCADE)
+      .onDelete(RelationRule.SET_NULL);
+  });
+
+  await knex.schema.alterTable(TableName.SERVICES, table => {
+    table
+      .integer(ColumnName.ORDER_ID)
+      .references(ColumnName.ORDER_ID)
+      .inTable(TableName.ORDERS_TO_SERVICES)
       .onUpdate(RelationRule.CASCADE)
       .onDelete(RelationRule.SET_NULL);
   });

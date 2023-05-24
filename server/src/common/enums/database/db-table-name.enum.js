@@ -1,5 +1,7 @@
 const DbTableName = {
-  USERS: 'users'
+  USERS: 'users',
+  IMAGES: 'images',
+  WORKSHOPS: 'workshops'
 };
 
 export { DbTableName };

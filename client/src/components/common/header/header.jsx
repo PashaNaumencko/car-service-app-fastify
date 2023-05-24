@@ -36,7 +36,7 @@ const Header = ({ isSideMenuOpen, onSideMenuOpen, onLogout }) => {
         </IconButton>
         <Box sx={{ flexGrow: 1 }}>
           <Typography variant="h6" noWrap component="div">
-            Car Service App
+            Car Service
           </Typography>
         </Box>
 

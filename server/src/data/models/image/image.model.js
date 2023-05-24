@@ -1,9 +1,9 @@
 import { DbTableName } from '../../../common/enums/enums.js';
 import { Abstract as AbstractModel } from '../abstract/abstract.model.js';
 
-class User extends AbstractModel {
+class Image extends AbstractModel {
   static get tableName() {
-    return DbTableName.USERS;
+    return DbTableName.IMAGES;
   }
 
   static get jsonSchema() {
@@ -11,16 +11,13 @@ class User extends AbstractModel {
 
     return {
       type: baseSchema.type,
-      required: ['email', 'username', 'password'],
+      required: ['link'],
       properties: {
         ...baseSchema.properties,
-        email: { type: 'string' },
-        username: { type: 'string' },
-        password: { type: 'string' },
-        role: { type: 'string', enum: ['User', 'Admin'], default: 'User' }
+        link: { type: 'string' }
       }
     };
   }
 }
 
-export { User };
+export { Image };

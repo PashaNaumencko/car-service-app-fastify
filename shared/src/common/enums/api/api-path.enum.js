@@ -1,5 +1,9 @@
 const ApiPath = {
-  AUTH: '/auth'
+  AUTH: '/auth',
+  WORKSHOPS: '/workshops',
+  ORDERS: '/orders',
+  CARS: '/cars',
+  SERVICES: '/services'
 };
 
 export { ApiPath };

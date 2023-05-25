@@ -10,7 +10,7 @@ class Workshop {
     });
   }
 
-  getPosts() {
+  getAll() {
     return this._workshopRepository.getWorkshops();
   }
 

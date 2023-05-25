@@ -8,7 +8,7 @@ class Workshop extends Abstract {
   getWorkshops() {
     return this.model
       .query()
-      .select('posts.*')
+      .select('workshops.*')
       .withGraphFetched('[image]')
       .orderBy('createdAt', 'desc');
   }
@@ -16,7 +16,7 @@ class Workshop extends Abstract {
   getWorkshopById(id) {
     return this.model
       .query()
-      .select('posts.*')
+      .select('workshops.*')
       .where({ id })
       .withGraphFetched('[admin, image]')
       .first();

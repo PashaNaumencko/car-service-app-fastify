@@ -1,10 +1,14 @@
 import { usersSeed } from '../seed-data/users-seed.js';
 import { workshopImagesSeed, workshopsSeeds } from '../seed-data/workshops-seed.js';
+import { carsSeeds } from '../seed-data/cars-seed.js';
+import { servicesSeeds } from '../seed-data/services-seed.js';
 
 const TableName = {
   USERS: 'users',
   WORKSHOPS: 'workshops',
-  IMAGES: 'images'
+  IMAGES: 'images',
+  CARS: 'cars',
+  SERVICES: 'services'
 };
 
 const ColumnName = {
@@ -22,9 +26,13 @@ export async function seed(knex) {
       await trx(TableName.USERS).del();
       await trx(TableName.WORKSHOPS).del();
       await trx(TableName.IMAGES).del();
+      await trx(TableName.CARS).del();
+      await trx(TableName.SERVICES).del();
 
-      // Add images.
+      // Add predefined images, services, cars
       await trx(TableName.IMAGES).insert(workshopImagesSeed);
+      await trx(TableName.CARS).insert(carsSeeds);
+      await trx(TableName.SERVICES).insert(servicesSeeds);
 
       const workshopImages = await trx(TableName.IMAGES)
         .select('id')

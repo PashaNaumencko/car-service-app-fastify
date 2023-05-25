@@ -6,7 +6,7 @@ class Service {
   create(workshopId, service) {
     return this._serviceRepository.create({
       ...service,
-      workshopId
+      workshopId: workshopId ?? null
     });
   }
 

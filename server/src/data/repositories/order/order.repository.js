@@ -1,11 +1,11 @@
 import { Abstract } from '../abstract/abstract.repository.js';
 
 class Order extends Abstract {
-  constructor({ carModel }) {
-    super(carModel);
+  constructor({ orderModel }) {
+    super(orderModel);
   }
 
-  geOrders() {
+  getOrders() {
     return this.model
       .query()
       .select('orders.*')

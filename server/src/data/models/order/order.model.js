@@ -26,6 +26,7 @@ class Order extends AbstractModel {
         'status',
         'carId',
         'workshopId'
+        // 'serviceId'
       ],
       properties: {
         ...baseSchema.properties,
@@ -33,7 +34,7 @@ class Order extends AbstractModel {
         description: { type: 'string' },
         model: { type: 'string' },
         yearOfProduction: { type: 'integer' },
-        licensePlateNumber: { type: 'integer' },
+        licensePlateNumber: { type: 'string' },
         visitDate: { type: 'string' },
         status: {
           type: 'string',
@@ -41,8 +42,8 @@ class Order extends AbstractModel {
           default: 'Requested'
         },
         carId: { type: ['integer', 'null'] },
-        workshopId: { type: ['integer', 'null'] },
-        serviceId: { type: ['integer', 'null'] }
+        workshopId: { type: ['integer', 'null'] }
+        // serviceId: { type: ['integer', 'null'] }
       }
     };
   }
@@ -66,14 +67,22 @@ class Order extends AbstractModel {
           to: `${DbTableName.USERS}.id`
         }
       },
+      // orderServices: {
+      //   relation: Model.HasManyRelation,
+      //   modelClass: OrderToServiceModel,
+      //   join: {
+      //     from: `${DbTableName.ORDERS}.id`,
+      //     to: 'UsersTeams.userId'
+      //   }
+      // }
       services: {
         relation: Model.ManyToManyRelation,
         modelClass: ServiceModel,
         join: {
           from: `${DbTableName.ORDERS}.id`,
           through: {
-            from: `$${DbTableName.ORDERS_TO_SERVICES}.serviceId`,
-            to: `${DbTableName.ORDERS_TO_SERVICES}.orderId`,
+            from: `${DbTableName.ORDERS_TO_SERVICES}.orderId`,
+            to: `${DbTableName.ORDERS_TO_SERVICES}.serviceId`,
             modelClass: OrderToServiceModel
           },
           to: `${DbTableName.SERVICES}.id`

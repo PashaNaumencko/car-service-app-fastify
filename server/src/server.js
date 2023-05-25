@@ -6,7 +6,7 @@ import { Model } from 'objection';
 
 import knexConfig from '../knexfile.js';
 import { ENV, ExitCode } from './common/enums/enums.js';
-import { auth, user } from './services/services.js';
+import { auth, user, workshop, order, car, service, orderToService } from './services/services.js';
 import { initApi } from './api/api.js';
 
 class App {
@@ -41,7 +41,12 @@ class App {
     app.register(initApi, {
       services: {
         auth,
-        user
+        user,
+        workshop,
+        order,
+        car,
+        service,
+        orderToService
       },
       prefix: ENV.APP.API_PATH
     });

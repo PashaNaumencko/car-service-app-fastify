@@ -1,17 +1,28 @@
 class Order {
-  constructor({ serviceRepository }) {
-    this._serviceRepository = serviceRepository;
+  constructor({ orderRepository, orderToServiceService }) {
+    this._orderRepository = orderRepository;
+    this._orderToServiceService = orderToServiceService;
   }
 
-  create(workshopId, service) {
-    return this._serviceRepository.create({
-      ...service,
-      workshopId
+  async create(order) {
+    const createdOrder = await this._orderRepository.create(order);
+
+    console.log('createdOrder.services', createdOrder.id);
+
+    const orderToServiceServices = createdOrder.services.map(service => {
+      return this._orderToServiceService.create({
+        orderId: createdOrder.id,
+        serviceId: service.id
+      });
     });
+
+    await Promise.all(orderToServiceServices);
+
+    return createdOrder;
   }
 
-  getServices() {
-    return this._serviceRepository.getServices();
+  getAll() {
+    return this._orderRepository.getOrders();
   }
 }
 

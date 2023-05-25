@@ -30,7 +30,7 @@ const car = new Car({
 });
 
 const order = new Order({
-  orderModer: OrderModel
+  orderModel: OrderModel
 });
 
 const orderToService = new OrderToService({

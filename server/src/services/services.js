@@ -30,16 +30,19 @@ const car = new Car({
   carRepository
 });
 
-const order = new Order({
-  orderRepository
-});
-
 const service = new Service({
   serviceRepository
 });
 
 const orderToService = new OrderToService({
   orderToServiceRepository
+});
+
+console.log('orderRepository', orderRepository);
+
+const order = new Order({
+  orderRepository,
+  orderToServiceService: orderToService
 });
 
 export { auth, user, workshop, car, order, service, orderToService };

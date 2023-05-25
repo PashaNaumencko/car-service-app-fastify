@@ -7,7 +7,7 @@ import { Button, Card, CardContent, Stack, Typography } from '@mui/material';
 import { memo } from 'react';
 import { ContactsIconWrapper } from './contacts-card.styles';
 
-const ContactsCard = memo(({ name, address, phoneNumber, website }) => {
+const ContactsCard = memo(({ name, address, phoneNumber, website, onOpenOrderForm }) => {
   return (
     <Card>
       <CardContent sx={{ padding: 4 }}>
@@ -26,6 +26,7 @@ const ContactsCard = memo(({ name, address, phoneNumber, website }) => {
           color="primary"
           variant="contained"
           sx={{ textTransform: 'uppercase', marginBottom: 6 }}
+          onClick={onOpenOrderForm}
         >
           Book Visit
         </Button>

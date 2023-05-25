@@ -1,6 +1,10 @@
 export const DEFAULT_CREATE_ORDER_FORM_PAYLOAD = {
-  carBrand: '',
-  services: []
+  services: [],
+  description: '',
+  carId: '',
+  model: '',
+  yearOfProduction: null,
+  licensePlateNumber: ''
 };
 
 export const CREATE_ORDER_FORM_STEPS = [

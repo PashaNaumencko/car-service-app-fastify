@@ -1,5 +1,8 @@
 import { Grid, Typography } from '@mui/material';
+import { ModalVariant } from 'common/enums/enums';
 import { Image, LoadingContainer } from 'components/common/common';
+import { useModal } from 'hooks/hooks';
+import { useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetWorkshopByIdQuery } from 'store/workshop/workshop';
 import { ContactsCard, Services } from './components/components';
@@ -8,6 +11,12 @@ import { StyledLeftSideWrapper } from './workshop.styles';
 const Workshop = () => {
   const { id } = useParams();
   const { data: workshop = null, isLoading } = useGetWorkshopByIdQuery(id);
+  const { handleOpen } = useModal();
+
+  const handleOpenOrderForm = useCallback(
+    () => handleOpen({ variant: ModalVariant.CREATE_ORDER, state: { workshop } }),
+    [handleOpen, workshop]
+  );
 
   if (isLoading) {
     return <LoadingContainer />;
@@ -36,6 +45,7 @@ const Workshop = () => {
           address={workshop?.address}
           phoneNumber={workshop?.phoneNumber}
           website={workshop?.website}
+          onOpenOrderForm={handleOpenOrderForm}
         />
       </Grid>
     </Grid>

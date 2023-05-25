@@ -3,9 +3,12 @@ import { Autocomplete, Input } from 'components/common/common';
 import { useFormContext } from 'react-hook-form';
 import { useStepper } from 'hooks/hooks';
 
-const ChooseServiceStep = ({ services }) => {
-  const { control } = useFormContext();
+const ChooseServiceStep = ({ serviceOptions }) => {
+  const { control, watch } = useFormContext();
   const { handleNext } = useStepper();
+
+  const services = watch('services');
+  const description = watch('description');
 
   return (
     <Stack direction="column" alignItems="center">
@@ -19,8 +22,8 @@ const ChooseServiceStep = ({ services }) => {
         <Autocomplete
           control={control}
           name="services"
-          options={services}
-          displayedLabelName="name"
+          options={serviceOptions}
+          displayedLabelName="title"
           paperWidth={500}
         />
       </Box>
@@ -37,6 +40,7 @@ const ChooseServiceStep = ({ services }) => {
         variant="contained"
         color="primary"
         fullWidth
+        disabled={!services.length || !description.trim()}
         onClick={handleNext}
         sx={{ textTransform: 'uppercase', maxWidth: 500, marginTop: 3 }}
       >

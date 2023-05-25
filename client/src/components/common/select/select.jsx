@@ -15,6 +15,8 @@ const Select = ({
   options,
   label = '',
   paperWidth = MIN_SELECT_PAPER_WIDTH,
+  selectedValueFieldName = 'id',
+  selectedValueLabelName,
   disabled = false
 }) => {
   const { field } = useController({ name, control });
@@ -50,9 +52,9 @@ const Select = ({
           }
         }}
       >
-        {Object.keys(options).map(option => (
-          <MenuItem key={options[option]} value={options[option]} sx={{ padding: '12px' }}>
-            <ListItemText primary={option} />
+        {options.map(option => (
+          <MenuItem key={option.id} value={option[selectedValueFieldName]} sx={{ padding: '12px' }}>
+            <ListItemText primary={option[selectedValueLabelName]} />
           </MenuItem>
         ))}
       </MUISelect>

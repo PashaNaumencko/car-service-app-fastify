@@ -19,7 +19,7 @@ const Autocomplete = ({
   options,
   displayedLabelName,
   label = '',
-  placeholder = 'Enter value',
+  placeholder = 'Введіть послугу',
   paperWidth = MIN_AUTOCOMPLETE_PAPER_WIDTH
 }) => {
   const { field } = useController({ name, control });
@@ -33,7 +33,7 @@ const Autocomplete = ({
       multiple
       onChange={handleChange}
       options={options}
-      disableCloseOnSelect
+      // disableCloseOnSelect
       getOptionLabel={option => option[displayedLabelName]}
       renderOption={(props, option, { selected }) => (
         <li {...props}>
@@ -47,21 +47,7 @@ const Autocomplete = ({
         </li>
       )}
       style={{ width: paperWidth }}
-      renderInput={params => (
-        <TextField
-          {...params}
-          label={label}
-          placeholder={placeholder}
-          InputProps={{
-            ...params.InputProps,
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchRoundedIcon color="primary" />
-              </InputAdornment>
-            )
-          }}
-        />
-      )}
+      renderInput={params => <TextField {...params} label={label} placeholder={placeholder} />}
     />
   );
 };

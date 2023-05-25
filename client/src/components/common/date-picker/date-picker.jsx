@@ -6,7 +6,7 @@ const DatePicker = ({ control, name }) => {
   const { field } = useController({ control, name });
 
   const handleChange = newValue => {
-    field.onChange(newValue);
+    field.onChange(newValue.toDate().toISOString());
   };
 
   return (

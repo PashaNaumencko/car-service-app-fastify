@@ -2,11 +2,19 @@ import { Select, Input, YearField } from 'components/common/common';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import { useStepper } from 'hooks/hooks';
-import { mapDataToOptions } from 'helpers/helpers';
 
-const FillCarInfo = ({ carBrands }) => {
-  const { control } = useFormContext();
+const FillCarInfo = ({ carOptions }) => {
+  const { control, watch } = useFormContext();
   const { handleNext } = useStepper();
+
+  const carId = watch('carId');
+  const model = watch('model');
+  const yearOfProduction = watch('yearOfProduction');
+  const licensePlateNumber = watch('licensePlateNumber');
+
+  const isNextButtonDisabled =
+    !carId || !model.trim() || !yearOfProduction || !licensePlateNumber.trim();
+
   return (
     <Stack direction="column" alignItems="center">
       <Typography variant="h2" marginBottom={7}>
@@ -18,9 +26,10 @@ const FillCarInfo = ({ carBrands }) => {
       <Box sx={{ marginBottom: 6 }}>
         <Select
           control={control}
-          name="brand"
+          name="carId"
           label="Марка"
-          options={mapDataToOptions(carBrands, 'fullName')}
+          options={carOptions}
+          selectedValueLabelName="brand"
           paperWidth={500}
         />
       </Box>
@@ -38,6 +47,7 @@ const FillCarInfo = ({ carBrands }) => {
         variant="contained"
         color="primary"
         fullWidth
+        disabled={isNextButtonDisabled}
         onClick={handleNext}
         sx={{ textTransform: 'uppercase', maxWidth: 500, marginTop: 3 }}
       >

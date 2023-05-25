@@ -4,9 +4,8 @@ import { modalActionCreator } from 'store/modal/modal.slice';
 
 const useModal = () => {
   const dispatch = useDispatch();
-  const { modalConfig, modalState } = useSelector(state => ({
-    modalConfig: state.modal.modalConfig,
-    modalState: state.modal.state
+  const { modalConfig } = useSelector(state => ({
+    modalConfig: state.modal.modalConfig
   }));
 
   const handleClose = useCallback(() => dispatch(modalActionCreator.closeModal()), [dispatch]);
@@ -19,8 +18,7 @@ const useModal = () => {
   return {
     handleOpen,
     handleClose,
-    modalConfig,
-    modalState
+    modalConfig
   };
 };
 

@@ -7,9 +7,10 @@ import { WorkshopCard } from './components/components';
 
 const Workshops = () => {
   const { handleOpen } = useModal();
-  const { data = [], isFetching } = useGetWorkshopsQuery();
+  const { data: workshops = [], isFetching } = useGetWorkshopsQuery();
 
-  const handleOpenOrderForm = () => handleOpen({ variant: ModalVariant.CREATE_ORDER });
+  const handleOpenOrderForm = workshop => () =>
+    handleOpen({ variant: ModalVariant.CREATE_ORDER, state: { workshop } });
 
   if (isFetching) {
     return <LoadingContainer height="calc(100vh - 64px)" />;
@@ -17,8 +18,12 @@ const Workshops = () => {
 
   return (
     <Stack direction="column" gap={8} padding={4}>
-      {data.map(workshop => (
-        <WorkshopCard key={workshop.id} workshop={workshop} onOpenOrderForm={handleOpenOrderForm} />
+      {workshops.map(workshop => (
+        <WorkshopCard
+          key={workshop.id}
+          workshop={workshop}
+          onOpenOrderForm={handleOpenOrderForm(workshop)}
+        />
       ))}
     </Stack>
   );

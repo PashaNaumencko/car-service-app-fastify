@@ -6,7 +6,7 @@ const YearField = ({ control, name, label, width = 185 }) => {
   const { field } = useController({ control, name });
 
   const handleChange = newValue => {
-    field.onChange(newValue ? newValue.format('YYYY') : null);
+    field.onChange(newValue ? Number(newValue.format('YYYY')) : null);
   };
 
   return (

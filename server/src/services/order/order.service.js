@@ -7,14 +7,14 @@ class Order {
   async create(order) {
     const createdOrder = await this._orderRepository.create(order);
 
-    const orderToServiceServices = createdOrder.services.map(service => {
-      return this._orderToServiceService.create({
-        orderId: createdOrder.id,
-        serviceId: service.id
-      });
-    });
+    // const orderToServiceServices = createdOrder.services.map(service => {
+    //   return this._orderToServiceService.create({
+    //     orderId: createdOrder.id,
+    //     serviceId: service.id
+    //   });
+    // });
 
-    await Promise.all(orderToServiceServices);
+    // await Promise.all(orderToServiceServices);
 
     return createdOrder;
   }

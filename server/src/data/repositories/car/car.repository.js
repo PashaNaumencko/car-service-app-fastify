@@ -5,7 +5,7 @@ class Car extends Abstract {
     super(carModel);
   }
 
-  geCars() {
+  getCars() {
     return this.model.query().select('cars.*').orderBy('createdAt', 'desc');
   }
 }

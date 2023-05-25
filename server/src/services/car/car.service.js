@@ -3,8 +3,8 @@ class Car {
     this._carRepository = carRepository;
   }
 
-  getCars() {
-    return this._serviceRepository.getServices();
+  getAll() {
+    return this._carRepository.getCars();
   }
 }
 

@@ -10,7 +10,7 @@ class Service {
     });
   }
 
-  getServices() {
+  getAll() {
     return this._serviceRepository.getServices();
   }
 }

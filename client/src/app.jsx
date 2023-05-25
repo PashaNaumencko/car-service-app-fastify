@@ -1,7 +1,13 @@
-import { CircularProgress, Stack } from '@mui/material';
 import { AppRoute, StorageKey } from 'common/enums/enums';
 import { Auth } from 'components/auth/auth';
-import { Main, PrivateRoute, PublicRoute, Header, SideMenu } from 'components/common/common';
+import {
+  Main,
+  PrivateRoute,
+  PublicRoute,
+  Header,
+  SideMenu,
+  LoadingContainer
+} from 'components/common/common';
 import { Home } from 'components/home/home';
 import { Modals } from 'components/modals/modals';
 import { Workshop } from 'components/workshop/workshop';
@@ -40,11 +46,7 @@ const App = () => {
   }, [hasToken, dispatch]);
 
   if (hasToken && !hasUser) {
-    return (
-      <Stack justifyContent="center" alignItems="center" height="100vh">
-        <CircularProgress color="primary" size={70} />
-      </Stack>
-    );
+    return <LoadingContainer height="100vh" />;
   }
   return (
     <>

@@ -4,27 +4,22 @@ import { AppRoute } from 'common/enums/enums';
 import { Image } from 'components/common/common';
 import { StyledCard, StyledCardContent, StyledWorkshopLink } from './workshop-card.styles';
 
-const WorkshopCard = ({ onOpenOrderForm }) => {
+const WorkshopCard = ({ onOpenOrderForm, workshop }) => {
   return (
     <StyledCard>
       <StyledCardContent>
-        <Image
-          width={260}
-          borderRadius={5}
-          // eslint-disable-next-line max-len
-          src="https://res.cloudinary.com/intercars/image/upload/c_fit,h_400,w_400,f_auto,q_auto/v1666014168/workshops_prod2/v26vx2xm/IMG_20201208_152840_1666014164656.jpg"
-        />
+        <Image width={260} borderRadius={5} src={workshop.image.link} />
         <Stack direction="column" gap={2}>
-          <StyledWorkshopLink to={`${AppRoute.WORKSHOP}/11`}>
-            <Typography variant="h6">Workshop Name</Typography>
+          <StyledWorkshopLink to={`${AppRoute.WORKSHOP}/${workshop.id}`}>
+            <Typography variant="h6">{workshop.name}</Typography>
           </StyledWorkshopLink>
           <Typography variant="body2" color="text.secondary">
-            Maksymovycha 18, Vinnyts'ka city council, 21012 Vinnytsia
+            {workshop.address}
           </Typography>
           <Stack direction="row" gap={4} alignItems="center">
             <LocalPhoneIcon color="primary" />
             <Typography variant="body2" color="text.secondary" as="a" href="tel:+380674502686">
-              +380 67 450 2686
+              {workshop.phoneNumber}
             </Typography>
           </Stack>
           <Stack direction="row" justifyContent="space-between" gap={4} marginTop={5}>
@@ -40,11 +35,7 @@ const WorkshopCard = ({ onOpenOrderForm }) => {
                 display: '-webkit-box'
               }}
             >
-              Extensive experience in servicing cars. We carry out high-quality diagnostics and car
-              repairs with a guarantee. Selection of spare parts. Services: -Diagnosis and repair of
-              the chassis. -Maintenance (engine oil and filter, automatic transmission, replacement
-              of those fluids) - Brake system repair - Engine diagnostics and repair -Endoscopy of
-              engine cylinders
+              {workshop.description}
             </Typography>
             <Button size="large" variant="outlined" color="primary" onClick={onOpenOrderForm}>
               Book visit

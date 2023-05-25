@@ -1,22 +1,23 @@
-import { Card, CardContent, Button, Typography, Stack } from '@mui/material';
 import {
-  LocalPhone as LocalPhoneIcon,
   Link as LinkIcon,
+  LocalPhone as LocalPhoneIcon,
   LocationOnOutlined as LocationOnIcon
 } from '@mui/icons-material';
+import { Button, Card, CardContent, Stack, Typography } from '@mui/material';
+import { memo } from 'react';
 import { ContactsIconWrapper } from './contacts-card.styles';
 
-const ContactsCard = () => {
+const ContactsCard = memo(({ name, address, phoneNumber, website }) => {
   return (
     <Card>
       <CardContent sx={{ padding: 4 }}>
         <Typography variant="h2" marginBottom={3}>
-          TEC-SERVICE
+          {name}
         </Typography>
         <Stack direction="row" alignItems="center" marginBottom={3}>
           <LocationOnIcon color="primary" />
           <Typography variant="body2" color="text.secondary" marginLeft={2}>
-            Maksymovycha 18, Vinnyts'ka city council, 21012 Vinnytsia
+            {address}
           </Typography>
         </Stack>
 
@@ -43,7 +44,7 @@ const ContactsCard = () => {
             href="tel:+380674502686"
             sx={{ textDecoration: 'none' }}
           >
-            +380 67 450 2686
+            {phoneNumber}
           </Typography>
         </Stack>
         <Stack direction="row" alignItems="center">
@@ -54,7 +55,7 @@ const ContactsCard = () => {
             variant="body2"
             color="text.primary"
             as="a"
-            href="https://tec-service.weblium.site/"
+            href={website}
             sx={{ textDecoration: 'none' }}
           >
             Website
@@ -63,6 +64,8 @@ const ContactsCard = () => {
       </CardContent>
     </Card>
   );
-};
+});
+
+ContactsCard.displayName = 'ContactsCard';
 
 export { ContactsCard };

@@ -10,3 +10,4 @@ export { Select } from './select/select';
 export { SideMenu } from './side-menu/side-menu';
 export { YearField } from './year-field/year-field';
 export { PhoneNumberInput } from './phone-number-input/phone-number-input';
+export { LoadingContainer } from './loading-container/loading-container';

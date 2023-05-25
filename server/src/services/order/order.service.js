@@ -7,8 +7,6 @@ class Order {
   async create(order) {
     const createdOrder = await this._orderRepository.create(order);
 
-    console.log('createdOrder.services', createdOrder.id);
-
     const orderToServiceServices = createdOrder.services.map(service => {
       return this._orderToServiceService.create({
         orderId: createdOrder.id,
@@ -19,6 +17,10 @@ class Order {
     await Promise.all(orderToServiceServices);
 
     return createdOrder;
+  }
+
+  changeStatus(id, { status }) {
+    return this._orderRepository.changeStatus(id, status);
   }
 
   getAll() {

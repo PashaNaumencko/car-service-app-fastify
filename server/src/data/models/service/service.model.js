@@ -32,8 +32,8 @@ class Service extends AbstractModel {
           from: `${DbTableName.SERVICES}.id`,
           through: {
             from: `$${DbTableName.ORDERS_TO_SERVICES}.orderId`,
-            to: `${DbTableName.ORDERS_TO_SERVICES}.serviceId`
-            // modelClass: OrderToServiceModel
+            to: `${DbTableName.ORDERS_TO_SERVICES}.serviceId`,
+            modelClass: OrderToServiceModel
           },
           to: `${DbTableName.ORDERS}.id`
         }

@@ -12,6 +12,10 @@ class Order extends Abstract {
       .withGraphFetched('[workshop, car, services]')
       .orderBy('createdAt', 'desc');
   }
+
+  changeStatus(id, status) {
+    return this.model.query().patch({ status }).where({ id });
+  }
 }
 
 export { Order };

@@ -1,5 +1,7 @@
 const OrdersApiPath = {
-  ROOT: '/'
+  ROOT: '/',
+  $ID: '/:id',
+  CHANGE_STATUS: '/change-status'
 };
 
 export { OrdersApiPath };

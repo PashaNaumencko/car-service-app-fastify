@@ -2,7 +2,7 @@ import { ModalVariant } from 'common/enums/enums';
 import { StepperProvider } from 'contexts/contexts';
 import { useModal } from 'hooks/hooks';
 import { useMemo } from 'react';
-import { CreateOrderModal } from './components/components';
+import { CreateOrderModal, CreateServiceModal } from './components/components';
 
 const Modals = () => {
   const { modalConfig } = useModal();
@@ -14,6 +14,7 @@ const Modals = () => {
           <CreateOrderModal />
         </StepperProvider>
       ),
+      [ModalVariant.CREATE_SERVICE]: <CreateServiceModal />,
       DEFAULT: null
     }),
     []

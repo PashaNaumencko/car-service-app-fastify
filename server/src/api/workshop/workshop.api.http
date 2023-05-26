@@ -16,6 +16,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxN
 
 {
     "workshopId": 3,
-    "title": "Нова покраска 5",
+    "title": "Нова покраска 6",
     "price": 600
 }

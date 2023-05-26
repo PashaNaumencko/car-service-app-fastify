@@ -1,4 +1,5 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography, Fab } from '@mui/material';
+import { Add as AddIcon } from '@mui/icons-material';
 import { ModalVariant } from 'common/enums/enums';
 import { Image, LoadingContainer } from 'components/common/common';
 import { useModal } from 'hooks/hooks';
@@ -15,6 +16,11 @@ const Workshop = () => {
 
   const handleOpenOrderForm = useCallback(
     () => handleOpen({ variant: ModalVariant.CREATE_ORDER, state: { workshop } }),
+    [handleOpen, workshop]
+  );
+
+  const handleOpenServiceForm = useCallback(
+    () => handleOpen({ variant: ModalVariant.CREATE_SERVICE, state: { workshop } }),
     [handleOpen, workshop]
   );
 
@@ -48,6 +54,16 @@ const Workshop = () => {
           onOpenOrderForm={handleOpenOrderForm}
         />
       </Grid>
+      <Fab
+        color="primary"
+        variant="extended"
+        aria-label="add"
+        sx={{ position: 'absolute', bottom: 25, right: 25 }}
+        onClick={handleOpenServiceForm}
+      >
+        <AddIcon />
+        Створити послугу
+      </Fab>
     </Grid>
   );
 };

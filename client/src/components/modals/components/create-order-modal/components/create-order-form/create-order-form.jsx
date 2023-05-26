@@ -15,7 +15,6 @@ const CreateOrderForm = ({ cars, services, workshopId }) => {
   const [createOrder, { isLoading }] = useCreateOrderMutation();
 
   const handleSubmitOrder = async values => {
-    console.log('values', values);
     await createOrder({
       ...values,
       services: values.services.map(({ id, title, price }) => ({ id, title, price })),

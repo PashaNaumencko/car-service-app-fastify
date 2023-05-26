@@ -13,3 +13,5 @@ export { ExceptionMessage } from './exception/exception.js';
 export { NotificationMessage, NotificationType } from './notifications/notifications.js';
 export { ImageSize } from './components/components.js';
 export { ModalVariant } from './modals/modals.js';
+export { OrderStatus } from './order/order-status.enum.js';
+export { UserRole } from './user/user-role.enum.js';

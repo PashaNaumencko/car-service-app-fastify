@@ -41,7 +41,7 @@ const SideMenu = ({ isOpen, onClose }) => {
             sx={{ display: 'block' }}
           >
             <ListItemButton
-              selected={location.pathname.includes(AppRoute.ROOT)}
+              selected={location.pathname === AppRoute.ROOT}
               sx={{
                 minHeight: 48,
                 justifyContent: isOpen ? 'initial' : 'center',
@@ -70,7 +70,7 @@ const SideMenu = ({ isOpen, onClose }) => {
             sx={{ display: 'block' }}
           >
             <ListItemButton
-              selected={location.pathname.includes(AppRoute.ORDERS)}
+              selected={location.pathname === AppRoute.ORDERS}
               sx={{
                 minHeight: 48,
                 justifyContent: isOpen ? 'initial' : 'center',

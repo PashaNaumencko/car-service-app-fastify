@@ -14,26 +14,17 @@ const reducer = createReducer(initialState, builder => {
       state.dataStatus = DataStatus.PENDING;
     })
     .addMatcher(
-      isAnyOf(
-        login.fulfilled,
-        register.fulfilled,
-        logout.fulfilled,
-        loadCurrentUser.fulfilled
-      ),
+      isAnyOf(login.fulfilled, register.fulfilled, logout.fulfilled, loadCurrentUser.fulfilled),
       (state, action) => {
         state.user = action.payload;
         state.dataStatus = DataStatus.FULFILLED;
       }
     )
     .addMatcher(
-      isAnyOf(
-        login.rejected,
-        logout.fulfilled,
-        register.rejected,
-        loadCurrentUser.rejected
-      ),
+      isAnyOf(login.rejected, logout.rejected, register.rejected, loadCurrentUser.rejected),
       (state, action) => {
         state.user = null;
+        console.log('action.payload', action.payload);
         state.error = action.payload;
         state.dataStatus = DataStatus.REJECTED;
       }

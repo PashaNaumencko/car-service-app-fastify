@@ -7,57 +7,45 @@ import { ActionType } from './auth.common';
 const login = createAsyncThunk(
   ActionType.LOG_IN,
   async (payload, { extra: { services }, dispatch, rejectWithValue }) => {
-    try {
-      const { data } = await dispatch(
-        authApi.endpoints.login.initiate(payload)
-      );
+    // try {
+    const { data } = await dispatch(authApi.endpoints.login.initiate(payload));
 
-      services.storage.setItem(StorageKey.TOKEN, data.token);
+    services.storage.setItem(StorageKey.TOKEN, data.token);
 
-      return data.user;
-    } catch (err) {
-      return rejectWithValue(
-        err?.data.message ?? ExceptionMessage.UNKNOWN_ERROR
-      );
-    }
+    return data.user;
+    // } catch (err) {
+    //   return rejectWithValue(err?.data.message);
+    // }
   }
 );
 
 const register = createAsyncThunk(
   ActionType.REGISTER,
   async (payload, { extra: { services }, dispatch, rejectWithValue }) => {
-    try {
-      const { data } = await dispatch(
-        authApi.endpoints.register.initiate(payload)
-      );
+    // try {
+    const { data } = await dispatch(authApi.endpoints.register.initiate(payload));
 
-      services.storage.setItem(StorageKey.TOKEN, data.token);
+    services.storage.setItem(StorageKey.TOKEN, data.token);
 
-      return data.user;
-    } catch (err) {
-      return rejectWithValue(
-        err?.data.message ?? ExceptionMessage.UNKNOWN_ERROR
-      );
-    }
+    return data.user;
+    // } catch (err) {
+    //   console.log('err', err);
+    //   return rejectWithValue(err?.data.message);
+    // }
   }
 );
 
-const logout = createAsyncThunk(
-  ActionType.LOG_OUT,
-  (_request, { extra: { services } }) => {
-    services.storage.removeItem(StorageKey.TOKEN);
+const logout = createAsyncThunk(ActionType.LOG_OUT, (_request, { extra: { services } }) => {
+  services.storage.removeItem(StorageKey.TOKEN);
 
-    return null;
-  }
-);
+  return null;
+});
 
 const loadCurrentUser = createAsyncThunk(
   ActionType.LOAD_CURRENT_USER,
   async (_, { dispatch, rejectWithValue }) => {
     try {
-      const { data } = await dispatch(
-        authApi.endpoints.loadCurrentUser.initiate()
-      );
+      const { data } = await dispatch(authApi.endpoints.loadCurrentUser.initiate());
       return data;
     } catch (err) {
       const isHttpError = err instanceof HttpError;
@@ -66,7 +54,7 @@ const loadCurrentUser = createAsyncThunk(
         dispatch(logout());
       }
 
-      return rejectWithValue(err?.message ?? ExceptionMessage.UNKNOWN_ERROR);
+      return rejectWithValue(err?.message);
     }
   }
 );

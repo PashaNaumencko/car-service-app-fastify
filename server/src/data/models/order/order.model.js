@@ -1,4 +1,5 @@
 import { Model } from 'objection';
+import { join, resolve } from 'path';
 import { DbTableName } from '../../../common/enums/enums.js';
 import { Abstract as AbstractModel } from '../abstract/abstract.model.js';
 import { Workshop as WorkshopModel } from '../workshop/workshop.model.js';
@@ -26,7 +27,6 @@ class Order extends AbstractModel {
         'status',
         'carId',
         'workshopId'
-        // 'serviceId'
       ],
       properties: {
         ...baseSchema.properties,
@@ -43,7 +43,6 @@ class Order extends AbstractModel {
         },
         carId: { type: ['integer', 'null'] },
         workshopId: { type: ['integer', 'null'] }
-        // serviceId: { type: ['integer', 'null'] }
       }
     };
   }
@@ -72,19 +71,19 @@ class Order extends AbstractModel {
       //   modelClass: OrderToServiceModel,
       //   join: {
       //     from: `${DbTableName.ORDERS}.id`,
-      //     to: 'UsersTeams.userId'
+      //     to: `${DbTableName.ORDERS_TO_SERVICES}.orderId`
       //   }
-      // }
+      // },
+      // through: {
+      //   from: `${DbTableName.ORDERS_TO_SERVICES}.orderId`,
+      //   to: `${DbTableName.ORDERS_TO_SERVICES}.serviceId`
+      // },
+
       services: {
-        relation: Model.ManyToManyRelation,
+        relation: Model.HasManyRelation,
         modelClass: ServiceModel,
         join: {
           from: `${DbTableName.ORDERS}.id`,
-          through: {
-            from: `${DbTableName.ORDERS_TO_SERVICES}.orderId`,
-            to: `${DbTableName.ORDERS_TO_SERVICES}.serviceId`,
-            modelClass: OrderToServiceModel
-          },
           to: `${DbTableName.SERVICES}.id`
         }
       },

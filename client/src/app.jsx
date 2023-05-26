@@ -10,6 +10,7 @@ import {
 } from 'components/common/common';
 import { Home } from 'components/home/home';
 import { Modals } from 'components/modals/modals';
+import { Orders } from 'components/orders/orders';
 import { Workshop } from 'components/workshop/workshop';
 import { useCallback, useEffect, useState } from 'react';
 import { NotificationContainer } from 'react-notifications';
@@ -99,6 +100,14 @@ const App = () => {
             element={
               <PrivateRoute>
                 <Workshop />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.ORDERS}
+            element={
+              <PrivateRoute>
+                <Orders />
               </PrivateRoute>
             }
           />

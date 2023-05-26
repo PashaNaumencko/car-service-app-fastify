@@ -59,19 +59,30 @@ export async function up(knex) {
       .inTable(TableName.CARS)
       .onUpdate(RelationRule.CASCADE)
       .onDelete(RelationRule.SET_NULL);
-    table
-      .integer(ColumnName.SERVICE_ID)
-      .references(ColumnName.SERVICE_ID)
-      .inTable(TableName.ORDERS_TO_SERVICES)
-      .onUpdate(RelationRule.CASCADE)
-      .onDelete(RelationRule.SET_NULL);
   });
+
+  // await knex.schema.alterTable(TableName.ORDERS_TO_SERVICES, table => {
+  //   table
+  //     .integer(ColumnName.ORDER_ID)
+  //     .notNullable()
+  //     .references(ColumnName.ID)
+  //     .inTable(TableName.ORDERS)
+  //     .onUpdate(RelationRule.CASCADE)
+  //     .onDelete(RelationRule.SET_NULL);
+  //   table
+  //     .integer(ColumnName.SERVICE_ID)
+  //     .notNullable()
+  //     .references(ColumnName.ID)
+  //     .inTable(TableName.SERVICES)
+  //     .onUpdate(RelationRule.CASCADE)
+  //     .onDelete(RelationRule.SET_NULL);
+  // });
 
   await knex.schema.alterTable(TableName.SERVICES, table => {
     table
       .integer(ColumnName.ORDER_ID)
-      .references(ColumnName.ORDER_ID)
-      .inTable(TableName.ORDERS_TO_SERVICES)
+      .references(ColumnName.ID)
+      .inTable(TableName.ORDERS)
       .onUpdate(RelationRule.CASCADE)
       .onDelete(RelationRule.SET_NULL);
   });
@@ -82,4 +93,15 @@ export async function down(knex) {
     table.dropColumn(ColumnName.IMAGE_ID);
     table.dropColumn(ColumnName.ADMIN_ID);
   });
+
+  await knex.schema.alterTable(TableName.ORDERS, table => {
+    table.dropColumn(ColumnName.WORKSHOP_ID);
+    table.dropColumn(ColumnName.USER_ID);
+    table.dropColumn(ColumnName.CAR_ID);
+  });
+
+  // await knex.schema.alterTable(TableName.ORDERS_TO_SERVICES, table => {
+  //   table.dropColumn(ColumnName.ORDER_ID);
+  //   table.dropColumn(ColumnName.SERVICE_ID);
+  // });
 }

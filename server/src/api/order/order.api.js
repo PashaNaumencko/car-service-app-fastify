@@ -7,7 +7,7 @@ const initOrders = (fastify, opts, done) => {
   fastify.route({
     method: HttpMethod.GET,
     url: OrdersApiPath.ROOT,
-    [ControllerHook.HANDLER]: () => orderService.getAll()
+    [ControllerHook.HANDLER]: req => orderService.getAllByUserId(req.user.id)
   });
 
   fastify.route({

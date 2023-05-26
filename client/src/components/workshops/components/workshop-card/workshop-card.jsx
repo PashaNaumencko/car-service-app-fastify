@@ -2,9 +2,10 @@ import { LocalPhone as LocalPhoneIcon } from '@mui/icons-material';
 import { Button, Stack, Typography } from '@mui/material';
 import { AppRoute } from 'common/enums/enums';
 import { Image } from 'components/common/common';
+import { memo } from 'react';
 import { StyledCard, StyledCardContent, StyledWorkshopLink } from './workshop-card.styles';
 
-const WorkshopCard = ({ onOpenOrderForm, workshop }) => {
+const WorkshopCard = memo(({ onOpenOrderForm, workshop }) => {
   return (
     <StyledCard>
       <StyledCardContent>
@@ -45,6 +46,8 @@ const WorkshopCard = ({ onOpenOrderForm, workshop }) => {
       </StyledCardContent>
     </StyledCard>
   );
-};
+});
+
+WorkshopCard.displayName = 'WorkshopCard';
 
 export { WorkshopCard };

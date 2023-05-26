@@ -29,7 +29,7 @@ export const orderApi = baseApi.injectEndpoints({
     changeOrderStatus: build.mutation({
       query: ({ id, status }) => ({
         method: HttpMethod.PATCH,
-        url: `${ApiPath.AUTH}${id}${OrdersApiPath.CHANGE_STATUS}`,
+        url: `${ApiPath.ORDERS}/${id}${OrdersApiPath.CHANGE_STATUS}`,
         body: { status }
       }),
       invalidatesTags: (result, error, { id }) => [{ type: 'Orders', id }]

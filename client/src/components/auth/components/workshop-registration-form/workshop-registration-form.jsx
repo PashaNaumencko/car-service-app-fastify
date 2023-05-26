@@ -114,7 +114,7 @@ const WorkshopRegistrationForm = ({ onRegisterWorkshop, isLoading }) => {
             id="address"
             label="Адреса"
             type="text"
-            placeholder="м. Київ, вул. Ломоносова, 50/2"
+            placeholder="м. Чернівці, вул. Івасюка"
             control={control}
             name="address"
             width={300}

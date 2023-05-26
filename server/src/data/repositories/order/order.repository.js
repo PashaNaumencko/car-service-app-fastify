@@ -5,11 +5,12 @@ class Order extends Abstract {
     super(orderModel);
   }
 
-  getOrders() {
+  getOrdersByUserId(userId) {
     return this.model
       .query()
       .select('orders.*')
       .withGraphFetched('[workshop, car, services]')
+      .where({ userId })
       .orderBy('createdAt', 'desc');
   }
 

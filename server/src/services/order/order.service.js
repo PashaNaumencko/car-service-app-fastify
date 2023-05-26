@@ -7,7 +7,7 @@ class Order {
   async create(order) {
     const createdOrder = await this._orderRepository.create(order);
 
-    // const orderToServiceServices = createdOrder.services.map(service => {
+    // const orderToServiceServices = services.map(service => {
     //   return this._orderToServiceService.create({
     //     orderId: createdOrder.id,
     //     serviceId: service.id
@@ -23,8 +23,8 @@ class Order {
     return this._orderRepository.changeStatus(id, status);
   }
 
-  getAll() {
-    return this._orderRepository.getOrders();
+  getAllByUserId(userId) {
+    return this._orderRepository.getOrdersByUserId(userId);
   }
 }
 

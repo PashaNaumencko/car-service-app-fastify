@@ -84,13 +84,13 @@ export async function up(knex) {
     table.dateTime(ColumnName.UPDATED_AT).notNullable().defaultTo(knex.fn.now());
   });
 
-  await knex.schema.createTable(TableName.ORDERS_TO_SERVICES, table => {
-    table.increments(ColumnName.ID).primary();
-    table.integer(ColumnName.ORDER_ID).notNullable().unique();
-    table.integer(ColumnName.SERVICE_ID).notNullable().unique();
-    table.dateTime(ColumnName.CREATED_AT).notNullable().defaultTo(knex.fn.now());
-    table.dateTime(ColumnName.UPDATED_AT).notNullable().defaultTo(knex.fn.now());
-  });
+  // await knex.schema.createTable(TableName.ORDERS_TO_SERVICES, table => {
+  //   table.increments(ColumnName.ID).primary();
+  //   table.integer(ColumnName.ORDER_ID).notNullable().unique();
+  //   table.integer(ColumnName.SERVICE_ID).notNullable().unique();
+  //   table.dateTime(ColumnName.CREATED_AT).notNullable().defaultTo(knex.fn.now());
+  //   table.dateTime(ColumnName.UPDATED_AT).notNullable().defaultTo(knex.fn.now());
+  // });
 
   await knex.schema.createTable(TableName.SERVICES, table => {
     table.increments(ColumnName.ID).primary();
@@ -103,4 +103,9 @@ export async function up(knex) {
 
 export async function down(knex) {
   await knex.schema.dropTableIfExists(TableName.USERS);
+  await knex.schema.dropTableIfExists(TableName.WORKSHOPS);
+  await knex.schema.dropTableIfExists(TableName.IMAGES);
+  await knex.schema.dropTableIfExists(TableName.ORDERS);
+  await knex.schema.dropTableIfExists(TableName.CARS);
+  await knex.schema.dropTableIfExists(TableName.SERVICES);
 }

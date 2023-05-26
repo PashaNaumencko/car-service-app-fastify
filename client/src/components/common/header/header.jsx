@@ -63,13 +63,13 @@ const Header = ({ isSideMenuOpen, onSideMenuOpen, onLogout }) => {
             <MenuItem>
               <AccountCircleIcon />
               <Typography textAlign="center" marginLeft={2}>
-                Profile
+                Профіль
               </Typography>
             </MenuItem>
             <MenuItem onClick={onLogout}>
               <LogoutIcon />
               <Typography textAlign="center" marginLeft={2}>
-                Logout
+                Вийти з системи
               </Typography>
             </MenuItem>
           </Menu>

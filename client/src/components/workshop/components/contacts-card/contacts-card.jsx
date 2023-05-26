@@ -28,10 +28,10 @@ const ContactsCard = memo(({ name, address, phoneNumber, website, onOpenOrderFor
           sx={{ textTransform: 'uppercase', marginBottom: 6 }}
           onClick={onOpenOrderForm}
         >
-          Book Visit
+          Забронювати візит
         </Button>
         <Typography variant="h6" marginBottom={3}>
-          Contant us
+          Контакти
         </Typography>
 
         <Stack direction="row" alignItems="center" marginBottom={3}>

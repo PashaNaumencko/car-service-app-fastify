@@ -57,7 +57,7 @@ const SideMenu = ({ isOpen, onClose }) => {
               >
                 <CarRepairIcon />
               </ListItemIcon>
-              <ListItemText primary="Workshops" sx={{ opacity: isOpen ? 1 : 0 }} />
+              <ListItemText primary="Майстерні" sx={{ opacity: isOpen ? 1 : 0 }} />
             </ListItemButton>
           </Link>
         </ListItem>
@@ -86,7 +86,7 @@ const SideMenu = ({ isOpen, onClose }) => {
               >
                 <ListAltIcon />
               </ListItemIcon>
-              <ListItemText primary="Ongoing requests" sx={{ opacity: isOpen ? 1 : 0 }} />
+              <ListItemText primary="Поточні замовлення" sx={{ opacity: isOpen ? 1 : 0 }} />
             </ListItemButton>
           </Link>
         </ListItem>

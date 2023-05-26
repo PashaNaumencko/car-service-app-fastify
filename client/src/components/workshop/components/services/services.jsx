@@ -1,7 +1,7 @@
 import { Button, Typography, Stack } from '@mui/material';
 import { StyledServiceItem } from './services.styles';
 
-const Services = () => {
+const Services = ({ services = [] }) => {
   return (
     <Stack
       direction="column"
@@ -10,20 +10,22 @@ const Services = () => {
       alignItems="center"
       width="100%"
     >
-      <StyledServiceItem>
-        <Stack direction="row" alignItems="center">
-          <Typography variant="body2" color="text.primary" marginRight={3}>
-            Replacement of engine oil and oil filter
-          </Typography>
-          <Typography variant="h6">from UAH 350</Typography>
-        </Stack>
+      {services.map(service => (
+        <StyledServiceItem>
+          <Stack direction="row" alignItems="center">
+            <Typography variant="body2" color="text.primary" marginRight={3}>
+              {service.title}
+            </Typography>
+            <Typography variant="h6">від {service.price} грн</Typography>
+          </Stack>
 
-        <Button variant="outlined" color="primary">
-          Order
-        </Button>
-      </StyledServiceItem>
+          <Button variant="outlined" color="primary">
+            Замовити
+          </Button>
+        </StyledServiceItem>
+      ))}
 
-      <StyledServiceItem>
+      {/* <StyledServiceItem>
         <Stack direction="row" alignItems="center">
           <Typography variant="body2" color="text.primary" marginRight={3}>
             Diagnostics
@@ -47,7 +49,7 @@ const Services = () => {
         <Button variant="outlined" color="primary">
           Order
         </Button>
-      </StyledServiceItem>
+      </StyledServiceItem> */}
     </Stack>
   );
 };

@@ -34,15 +34,15 @@ const Workshop = () => {
         <StyledLeftSideWrapper>
           <Image borderRadius={5} src={workshop?.image?.link} />
           <Typography variant="h2" marginTop={4} marginBottom={3}>
-            About
+            Про майстерню
           </Typography>
           <Typography variant="body1" color="text.secondary" marginBottom={4}>
             {workshop?.description}
           </Typography>
           <Typography variant="h2" marginTop={4} marginBottom={3}>
-            Services
+            Послуги
           </Typography>
-          <Services />
+          <Services services={workshop.services} />
         </StyledLeftSideWrapper>
       </Grid>
       <Grid item xs={4}>

@@ -51,19 +51,20 @@ const OrderCard = memo(({ order, userRole, onChangeStatus }) => {
                   Дата візиту: {moment(order.visitDate).format('MMMM Do, YYYY HH:mm')}
                 </Typography>
               </Stack>
-              <Stack direction="column" spacing={2}>
-                <Typography variant="body2" color="text.secondary" marginBottom={2}>
-                  Обрані послуги:
-                </Typography>
-                {order.services.map(service => (
-                  <Chip key={service.id} label={service.title} color="secondary" />
-                ))}
-              </Stack>
             </Box>
             <Chip
               label={statusLabels[order.status].title}
               color={statusLabels[order.status].color}
             />
+          </Stack>
+
+          <Stack direction="column" spacing={2} maxWidth="30%">
+            <Typography variant="body2" color="text.secondary" marginBottom={2}>
+              Обрані послуги:
+            </Typography>
+            {order.services.map(service => (
+              <Chip key={service.id} label={service.title} color="secondary" />
+            ))}
           </Stack>
 
           <Stack direction="row" justifyContent="space-between" gap={4} marginTop={5}>

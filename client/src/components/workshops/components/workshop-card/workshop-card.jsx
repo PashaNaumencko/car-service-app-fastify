@@ -39,7 +39,7 @@ const WorkshopCard = memo(({ onOpenOrderForm, workshop }) => {
               {workshop.description}
             </Typography>
             <Button size="large" variant="outlined" color="primary" onClick={onOpenOrderForm}>
-              Book visit
+              Забронювати візит
             </Button>
           </Stack>
         </Stack>

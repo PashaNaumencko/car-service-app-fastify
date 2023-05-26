@@ -4,17 +4,17 @@ class Order {
     this._orderToServiceService = orderToServiceService;
   }
 
-  async create(order) {
+  async create({ services, ...order }) {
     const createdOrder = await this._orderRepository.create(order);
 
-    // const orderToServiceServices = services.map(service => {
-    //   return this._orderToServiceService.create({
-    //     orderId: createdOrder.id,
-    //     serviceId: service.id
-    //   });
-    // });
+    const orderToServiceServices = services.map(service => {
+      return this._orderToServiceService.create({
+        orderId: createdOrder.id,
+        serviceId: service.id
+      });
+    });
 
-    // await Promise.all(orderToServiceServices);
+    await Promise.all(orderToServiceServices);
 
     return createdOrder;
   }

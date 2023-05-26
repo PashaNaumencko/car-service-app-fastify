@@ -1,13 +1,20 @@
 class Service {
-  constructor({ serviceRepository }) {
+  constructor({ serviceRepository, workshopToServiceRepository }) {
     this._serviceRepository = serviceRepository;
+    this._workshopToServiceRepository = workshopToServiceRepository;
   }
 
-  create(workshopId, service) {
-    return this._serviceRepository.create({
-      ...service,
-      workshopId: workshopId ?? null
+  async create(service) {
+    const createdService = await this._serviceRepository.create(service);
+
+    console.log('service', service);
+
+    await this._workshopToServiceRepository.create({
+      workshopId: service.workshopId,
+      serviceId: createdService.id
     });
+
+    return createdService;
   }
 
   getAll() {

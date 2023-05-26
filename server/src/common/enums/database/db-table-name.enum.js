@@ -5,7 +5,8 @@ const DbTableName = {
   ORDERS: 'orders',
   CARS: 'cars',
   SERVICES: 'services',
-  ORDERS_TO_SERVICES: 'orders_to_services'
+  ORDERS_TO_SERVICES: 'orders_to_services',
+  WORKSHOPS_TO_SERVICES: 'workshops_to_services'
 };
 
 export { DbTableName };

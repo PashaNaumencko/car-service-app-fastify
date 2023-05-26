@@ -18,7 +18,7 @@ class Workshop extends Abstract {
       .query()
       .select('workshops.*')
       .where({ id })
-      .withGraphFetched('[admin, image]')
+      .withGraphFetched('[admin, image, services]')
       .first();
   }
 }

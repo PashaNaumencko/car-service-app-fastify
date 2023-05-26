@@ -3,6 +3,7 @@ import { DbTableName } from '../../../common/enums/enums.js';
 import { Abstract as AbstractModel } from '../abstract/abstract.model.js';
 import { Image as ImageModel } from '../image/image.model.js';
 import { User as UserModel } from '../user/user.model.js';
+import { Service as ServiceModel } from '../service/service.model.js';
 
 class Workshop extends AbstractModel {
   static get tableName() {
@@ -46,6 +47,18 @@ class Workshop extends AbstractModel {
         join: {
           from: `${DbTableName.WORKSHOPS}.adminId`,
           to: `${DbTableName.USERS}.id`
+        }
+      },
+      services: {
+        relation: Model.ManyToManyRelation,
+        modelClass: ServiceModel,
+        join: {
+          from: `${DbTableName.WORKSHOPS}.id`,
+          through: {
+            from: `${DbTableName.WORKSHOPS_TO_SERVICES}.workshopId`,
+            to: `${DbTableName.WORKSHOPS_TO_SERVICES}.serviceId`
+          },
+          to: `${DbTableName.SERVICES}.id`
         }
       }
     };

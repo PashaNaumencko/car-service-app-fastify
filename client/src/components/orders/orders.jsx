@@ -27,17 +27,25 @@ const Orders = () => {
   return (
     <>
       <Stack direction="column" gap={8} padding={4} sx={{ width: '100%' }}>
-        <Typography variant="h2" color="text.primary" marginBottom={4}>
-          {user.role === UserRole.ADMIN ? 'Замовлення майстерні' : 'Мої замовлення'}
-        </Typography>
-        {orders.map(order => (
-          <OrderCard
-            key={order.id}
-            order={order}
-            userRole={user.role}
-            onChangeStatus={handleChangeOrderStatus}
-          />
-        ))}
+        {orders.length ? (
+          orders.map(order => (
+            <>
+              <Typography variant="h2" color="text.primary" marginBottom={4}>
+                {user.role === UserRole.ADMIN ? 'Замовлення майстерні' : 'Мої замовлення'}
+              </Typography>
+              <OrderCard
+                key={order.id}
+                order={order}
+                userRole={user.role}
+                onChangeStatus={handleChangeOrderStatus}
+              />
+            </>
+          ))
+        ) : (
+          <Typography variant="h6" color="text.primary" marginBottom={4} align="center">
+            На даний момент ви не зробили жодного замовлення
+          </Typography>
+        )}
       </Stack>
     </>
   );

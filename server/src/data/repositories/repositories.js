@@ -4,7 +4,8 @@ import {
   Service as ServiceModel,
   Car as CarModel,
   Order as OrderModel,
-  OrderToService as OrderToServiceModel
+  OrderToService as OrderToServiceModel,
+  WorkshopToService as WorkshopToServiceModel
 } from '../models/models.js';
 import { User } from './user/user.repository.js';
 import { Workshop } from './workshop/workshop.repository.js';
@@ -12,6 +13,7 @@ import { Service } from './service/service.repository.js';
 import { Car } from './car/car.repository.js';
 import { Order } from './order/order.repository.js';
 import { OrderToService } from './order-to-service/order-to-service.repository.js';
+import { WorkshopToService } from './workshop-to-service/workshop-to-service.repository.js';
 
 const user = new User({
   userModel: UserModel
@@ -19,6 +21,10 @@ const user = new User({
 
 const workshop = new Workshop({
   workshopModel: WorkshopModel
+});
+
+const workshopToService = new WorkshopToService({
+  workshopToServiceModel: WorkshopToServiceModel
 });
 
 const service = new Service({
@@ -36,4 +42,5 @@ const order = new Order({
 const orderToService = new OrderToService({
   orderToServiceModel: OrderToServiceModel
 });
-export { user, workshop, service, car, order, orderToService };
+
+export { user, workshop, service, car, order, orderToService, workshopToService };

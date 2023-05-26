@@ -1,11 +1,11 @@
 GET http://localhost:3001/api/orders HTTP/1.1
 Content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjg1MDYxMzI2LCJleHAiOjE2ODUxNDc3MjZ9.w-uCILcFxj9jiMQIDTZk16xIqZpIaYoOfc2gV92gP3I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1MDczNDk5LCJleHAiOjE2ODUxNTk4OTl9.smqU3kEB49He0DOp9hkn1ZqDfMNzW8ZMBkVcqd0-ZR0
 
 ###
 
 POST http://localhost:3001/api/orders HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjg1MDYxMzI2LCJleHAiOjE2ODUxNDc3MjZ9.w-uCILcFxj9jiMQIDTZk16xIqZpIaYoOfc2gV92gP3I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1MDczNDk5LCJleHAiOjE2ODUxNTk4OTl9.smqU3kEB49He0DOp9hkn1ZqDfMNzW8ZMBkVcqd0-ZR0
 Content-type: application/json
 
 {

@@ -5,7 +5,8 @@ const TableName = {
   ORDERS: 'orders',
   CARS: 'cars',
   SERVICES: 'services',
-  ORDERS_TO_SERVICES: 'orders_to_services'
+  ORDERS_TO_SERVICES: 'orders_to_services',
+  WORKSHOPS_TO_SERVICES: 'workshops_to_services'
 };
 
 const ColumnName = {
@@ -17,6 +18,7 @@ const ColumnName = {
   PHONE_NUMBER: 'phoneNumber',
   ADMIN_ID: 'adminId',
   IMAGE_ID: 'imageId',
+  WORKSHOP_ID: 'workshopId',
   EMAIL: 'email',
   ID: 'id',
   LINK: 'link',
@@ -84,13 +86,21 @@ export async function up(knex) {
     table.dateTime(ColumnName.UPDATED_AT).notNullable().defaultTo(knex.fn.now());
   });
 
-  // await knex.schema.createTable(TableName.ORDERS_TO_SERVICES, table => {
-  //   table.increments(ColumnName.ID).primary();
-  //   table.integer(ColumnName.ORDER_ID).notNullable().unique();
-  //   table.integer(ColumnName.SERVICE_ID).notNullable().unique();
-  //   table.dateTime(ColumnName.CREATED_AT).notNullable().defaultTo(knex.fn.now());
-  //   table.dateTime(ColumnName.UPDATED_AT).notNullable().defaultTo(knex.fn.now());
-  // });
+  await knex.schema.createTable(TableName.ORDERS_TO_SERVICES, table => {
+    table.increments(ColumnName.ID).primary();
+    table.integer(ColumnName.ORDER_ID).notNullable();
+    table.integer(ColumnName.SERVICE_ID).notNullable().unique();
+    table.dateTime(ColumnName.CREATED_AT).notNullable().defaultTo(knex.fn.now());
+    table.dateTime(ColumnName.UPDATED_AT).notNullable().defaultTo(knex.fn.now());
+  });
+
+  await knex.schema.createTable(TableName.WORKSHOPS_TO_SERVICES, table => {
+    table.increments(ColumnName.ID).primary();
+    table.integer(ColumnName.WORKSHOP_ID).notNullable();
+    table.integer(ColumnName.SERVICE_ID).notNullable().unique();
+    table.dateTime(ColumnName.CREATED_AT).notNullable().defaultTo(knex.fn.now());
+    table.dateTime(ColumnName.UPDATED_AT).notNullable().defaultTo(knex.fn.now());
+  });
 
   await knex.schema.createTable(TableName.SERVICES, table => {
     table.increments(ColumnName.ID).primary();
@@ -108,4 +118,6 @@ export async function down(knex) {
   await knex.schema.dropTableIfExists(TableName.ORDERS);
   await knex.schema.dropTableIfExists(TableName.CARS);
   await knex.schema.dropTableIfExists(TableName.SERVICES);
+  await knex.schema.dropTableIfExists(TableName.ORDERS_TO_SERVICES);
+  await knex.schema.dropTableIfExists(TableName.WORKSHOPS_TO_SERVICES);
 }

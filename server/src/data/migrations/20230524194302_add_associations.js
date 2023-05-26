@@ -5,7 +5,8 @@ const TableName = {
   ORDERS: 'orders',
   CARS: 'cars',
   SERVICES: 'services',
-  ORDERS_TO_SERVICES: 'orders_to_services'
+  ORDERS_TO_SERVICES: 'orders_to_services',
+  WORKSHOPS_TO_SERVICES: 'workshops_to_services'
 };
 
 const ColumnName = {
@@ -61,28 +62,17 @@ export async function up(knex) {
       .onDelete(RelationRule.SET_NULL);
   });
 
-  // await knex.schema.alterTable(TableName.ORDERS_TO_SERVICES, table => {
-  //   table
-  //     .integer(ColumnName.ORDER_ID)
-  //     .notNullable()
-  //     .references(ColumnName.ID)
-  //     .inTable(TableName.ORDERS)
-  //     .onUpdate(RelationRule.CASCADE)
-  //     .onDelete(RelationRule.SET_NULL);
-  //   table
-  //     .integer(ColumnName.SERVICE_ID)
-  //     .notNullable()
-  //     .references(ColumnName.ID)
-  //     .inTable(TableName.SERVICES)
-  //     .onUpdate(RelationRule.CASCADE)
-  //     .onDelete(RelationRule.SET_NULL);
-  // });
-
   await knex.schema.alterTable(TableName.SERVICES, table => {
     table
       .integer(ColumnName.ORDER_ID)
       .references(ColumnName.ID)
       .inTable(TableName.ORDERS)
+      .onUpdate(RelationRule.CASCADE)
+      .onDelete(RelationRule.SET_NULL);
+    table
+      .integer(ColumnName.WORKSHOP_ID)
+      .references(ColumnName.ID)
+      .inTable(TableName.WORKSHOPS)
       .onUpdate(RelationRule.CASCADE)
       .onDelete(RelationRule.SET_NULL);
   });
@@ -99,9 +89,4 @@ export async function down(knex) {
     table.dropColumn(ColumnName.USER_ID);
     table.dropColumn(ColumnName.CAR_ID);
   });
-
-  // await knex.schema.alterTable(TableName.ORDERS_TO_SERVICES, table => {
-  //   table.dropColumn(ColumnName.ORDER_ID);
-  //   table.dropColumn(ColumnName.SERVICE_ID);
-  // });
 }

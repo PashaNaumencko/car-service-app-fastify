@@ -1,8 +1,9 @@
 import { DbTableName } from '../../../common/enums/enums.js';
 import { Abstract as AbstractModel } from '../abstract/abstract.model.js';
-class OrderToService extends AbstractModel {
+
+class WorkshopToService extends AbstractModel {
   static get tableName() {
-    return DbTableName.ORDERS_TO_SERVICES;
+    return DbTableName.WORKSHOPS_TO_SERVICES;
   }
 
   static get jsonSchema() {
@@ -10,14 +11,14 @@ class OrderToService extends AbstractModel {
 
     return {
       type: baseSchema.type,
-      required: ['orderId', 'serviceId'],
+      required: ['workshopId', 'serviceId'],
       properties: {
         ...baseSchema.properties,
-        orderId: { type: ['integer', 'null'] },
+        workshopId: { type: ['integer', 'null'] },
         serviceId: { type: ['integer', 'null'] }
       }
     };
   }
 }
 
-export { OrderToService };
+export { WorkshopToService };

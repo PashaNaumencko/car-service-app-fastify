@@ -66,24 +66,15 @@ class Order extends AbstractModel {
           to: `${DbTableName.USERS}.id`
         }
       },
-      // orderServices: {
-      //   relation: Model.HasManyRelation,
-      //   modelClass: OrderToServiceModel,
-      //   join: {
-      //     from: `${DbTableName.ORDERS}.id`,
-      //     to: `${DbTableName.ORDERS_TO_SERVICES}.orderId`
-      //   }
-      // },
-      // through: {
-      //   from: `${DbTableName.ORDERS_TO_SERVICES}.orderId`,
-      //   to: `${DbTableName.ORDERS_TO_SERVICES}.serviceId`
-      // },
-
       services: {
-        relation: Model.HasManyRelation,
+        relation: Model.ManyToManyRelation,
         modelClass: ServiceModel,
         join: {
           from: `${DbTableName.ORDERS}.id`,
+          through: {
+            from: `${DbTableName.ORDERS_TO_SERVICES}.orderId`,
+            to: `${DbTableName.ORDERS_TO_SERVICES}.serviceId`
+          },
           to: `${DbTableName.SERVICES}.id`
         }
       },

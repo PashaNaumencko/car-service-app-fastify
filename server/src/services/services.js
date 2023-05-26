@@ -4,7 +4,8 @@ import {
   car as carRepository,
   order as orderRepository,
   service as serviceRepository,
-  orderToService as orderToServiceRepository
+  orderToService as orderToServiceRepository,
+  workshopToService as workshopToServiceRepository
 } from '../data/repositories/repositories.js';
 import { Auth } from './auth/auth.service.js';
 import { User } from './user/user.service.js';
@@ -31,14 +32,13 @@ const car = new Car({
 });
 
 const service = new Service({
-  serviceRepository
+  serviceRepository,
+  workshopToServiceRepository
 });
 
 const orderToService = new OrderToService({
   orderToServiceRepository
 });
-
-console.log('orderRepository', orderRepository);
 
 const order = new Order({
   orderRepository,

@@ -6,13 +6,7 @@ class Service extends Abstract {
   }
 
   getServices() {
-    return (
-      this.model
-        .query()
-        .select('services.*')
-        // .withGraphFetched('[workshop]')
-        .orderBy('createdAt', 'desc')
-    );
+    return this.model.query().select('services.*').orderBy('createdAt', 'desc');
   }
 }
 

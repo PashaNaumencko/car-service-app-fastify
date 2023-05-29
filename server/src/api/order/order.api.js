@@ -38,6 +38,34 @@ const initOrders = (fastify, opts, done) => {
     }
   });
 
+  fastify.route({
+    method: HttpMethod.PATCH,
+    url: `${OrdersApiPath.$ID}${OrdersApiPath.ASSIGN_PROVIDER}`,
+    async [ControllerHook.HANDLER](req, res) {
+      try {
+        const updatedOrder = await orderService.assignProvider(req.params.id, req.body);
+
+        return res.status(HttpCode.OK).send(updatedOrder);
+      } catch (err) {
+        return res.status(getErrorStatusCode(err)).send(err);
+      }
+    }
+  });
+
+  fastify.route({
+    method: HttpMethod.PATCH,
+    url: `${OrdersApiPath.$ID}${OrdersApiPath.COMPLETE_ORDER}`,
+    async [ControllerHook.HANDLER](req, res) {
+      try {
+        const updatedOrder = await orderService.completeOrder(req.params.id, req.body);
+
+        return res.status(HttpCode.OK).send(updatedOrder);
+      } catch (err) {
+        return res.status(getErrorStatusCode(err)).send(err);
+      }
+    }
+  });
+
   done();
 };
 

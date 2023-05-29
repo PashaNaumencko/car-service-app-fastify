@@ -8,6 +8,12 @@ class User {
 
     return user;
   }
+
+  async updateUserById(id, payload) {
+    const user = await this._userRepository.getUserById(id, payload);
+
+    return user;
+  }
 }
 
 export { User };

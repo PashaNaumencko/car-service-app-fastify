@@ -6,7 +6,8 @@ const TableName = {
   CARS: 'cars',
   SERVICES: 'services',
   ORDERS_TO_SERVICES: 'orders_to_services',
-  WORKSHOPS_TO_SERVICES: 'workshops_to_services'
+  WORKSHOPS_TO_SERVICES: 'workshops_to_services',
+  SERVICE_PROVIDERS: 'service_providers'
 };
 
 const ColumnName = {
@@ -19,6 +20,7 @@ const ColumnName = {
   ADMIN_ID: 'adminId',
   IMAGE_ID: 'imageId',
   WORKSHOP_ID: 'workshopId',
+  USER_ID: 'userId',
   EMAIL: 'email',
   ID: 'id',
   LINK: 'link',
@@ -31,6 +33,7 @@ const ColumnName = {
   VISIT_DATE: 'visitDate',
   STATUS: 'status',
   PASSWORD: 'password',
+  FULL_NAME: 'full_name',
   UPDATED_AT: 'updated_at',
   USERNAME: 'username',
   ROLE: 'role',
@@ -44,6 +47,8 @@ export async function up(knex) {
     table.string(ColumnName.EMAIL).notNullable().unique();
     table.string(ColumnName.USERNAME).notNullable().unique();
     table.string(ColumnName.PASSWORD).notNullable();
+    table.string(ColumnName.FULL_NAME);
+    table.string(ColumnName.PHONE_NUMBER);
     table.string(ColumnName.ROLE).notNullable().default('User');
     table.dateTime(ColumnName.CREATED_AT).notNullable().defaultTo(knex.fn.now());
     table.dateTime(ColumnName.UPDATED_AT).notNullable().defaultTo(knex.fn.now());
@@ -90,6 +95,14 @@ export async function up(knex) {
     table.increments(ColumnName.ID).primary();
     table.integer(ColumnName.ORDER_ID).notNullable();
     table.integer(ColumnName.SERVICE_ID).notNullable().unique();
+    table.dateTime(ColumnName.CREATED_AT).notNullable().defaultTo(knex.fn.now());
+    table.dateTime(ColumnName.UPDATED_AT).notNullable().defaultTo(knex.fn.now());
+  });
+
+  await knex.schema.createTable(TableName.SERVICE_PROVIDERS, table => {
+    table.increments(ColumnName.ID).primary();
+    table.integer(ColumnName.WORKSHOP_ID).notNullable();
+    table.integer(ColumnName.USER_ID).notNullable().unique();
     table.dateTime(ColumnName.CREATED_AT).notNullable().defaultTo(knex.fn.now());
     table.dateTime(ColumnName.UPDATED_AT).notNullable().defaultTo(knex.fn.now());
   });

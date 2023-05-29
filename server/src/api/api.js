@@ -6,8 +6,13 @@ import { initWorkshop } from './workshop/workshop.api.js';
 import { initOrders } from './order/order.api.js';
 import { initService } from './service/service.api.js';
 import { initCar } from './car/car.api.js';
+import { initServiceProvider } from './service-provider/service-provider.api.js';
 
-const initApi = (fastify, { services: { auth, user, workshop, order, service, car } }, done) => {
+const initApi = (
+  fastify,
+  { services: { auth, user, workshop, order, service, car, serviceProvider } },
+  done
+) => {
   fastify.setValidatorCompiler(({ schema }) => {
     return data => schema.validate(data);
   });
@@ -56,6 +61,13 @@ const initApi = (fastify, { services: { auth, user, workshop, order, service, ca
       car
     },
     prefix: ApiPath.CARS
+  });
+
+  fastify.register(initServiceProvider, {
+    services: {
+      serviceProvider
+    },
+    prefix: ApiPath.SERVICE_PROVIDERS
   });
 
   done();

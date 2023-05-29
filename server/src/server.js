@@ -6,7 +6,16 @@ import { Model } from 'objection';
 
 import knexConfig from '../knexfile.js';
 import { ENV, ExitCode } from './common/enums/enums.js';
-import { auth, user, workshop, order, car, service, orderToService } from './services/services.js';
+import {
+  auth,
+  user,
+  workshop,
+  order,
+  car,
+  service,
+  orderToService,
+  serviceProvider
+} from './services/services.js';
 import { initApi } from './api/api.js';
 
 class App {
@@ -46,7 +55,8 @@ class App {
         order,
         car,
         service,
-        orderToService
+        orderToService,
+        serviceProvider
       },
       prefix: ENV.APP.API_PATH
     });

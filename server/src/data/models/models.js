@@ -6,3 +6,4 @@ export { Car } from './cars/cars.model.js';
 export { Service } from './service/service.model.js';
 export { OrderToService } from './order-to-service/order-to-service.model.js';
 export { WorkshopToService } from './workshop-to-service/workshop-to-service.model.js';
+export { ServiceProvider } from './service-provider/service-provider.model.js';

@@ -6,7 +6,8 @@ const TableName = {
   CARS: 'cars',
   SERVICES: 'services',
   ORDERS_TO_SERVICES: 'orders_to_services',
-  WORKSHOPS_TO_SERVICES: 'workshops_to_services'
+  WORKSHOPS_TO_SERVICES: 'workshops_to_services',
+  SERVICE_PROVIDERS: 'service_providers'
 };
 
 const ColumnName = {
@@ -15,6 +16,7 @@ const ColumnName = {
   WORKSHOP_ID: 'workshop_id',
   ADMIN_ID: 'admin_id',
   USER_ID: 'user_id',
+  SERVICE_PROVIDER_ID: 'service_provider_id',
   CAR_ID: 'car_id',
   SERVICE_ID: 'service_id',
   ORDER_ID: 'order_id'
@@ -55,6 +57,12 @@ export async function up(knex) {
       .onUpdate(RelationRule.CASCADE)
       .onDelete(RelationRule.SET_NULL);
     table
+      .integer(ColumnName.SERVICE_PROVIDER_ID)
+      .references(ColumnName.ID)
+      .inTable(TableName.SERVICE_PROVIDERS)
+      .onUpdate(RelationRule.CASCADE)
+      .onDelete(RelationRule.SET_NULL);
+    table
       .integer(ColumnName.CAR_ID)
       .references(ColumnName.ID)
       .inTable(TableName.CARS)
@@ -87,6 +95,12 @@ export async function down(knex) {
   await knex.schema.alterTable(TableName.ORDERS, table => {
     table.dropColumn(ColumnName.WORKSHOP_ID);
     table.dropColumn(ColumnName.USER_ID);
+    table.dropColumn(ColumnName.SERVICE_PROVIDER_ID);
     table.dropColumn(ColumnName.CAR_ID);
+  });
+
+  await knex.schema.alterTable(TableName.SERVICES, table => {
+    table.dropColumn(ColumnName.ORDER_ID);
+    table.dropColumn(ColumnName.WORKSHOP_ID);
   });
 }

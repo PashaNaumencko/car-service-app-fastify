@@ -4,6 +4,7 @@ import { Abstract as AbstractModel } from '../abstract/abstract.model.js';
 import { Image as ImageModel } from '../image/image.model.js';
 import { User as UserModel } from '../user/user.model.js';
 import { Service as ServiceModel } from '../service/service.model.js';
+import { ServiceProvider as ServiceProviderModel } from '../service-provider/service-provider.model.js';
 
 class Workshop extends AbstractModel {
   static get tableName() {
@@ -59,6 +60,18 @@ class Workshop extends AbstractModel {
             to: `${DbTableName.WORKSHOPS_TO_SERVICES}.serviceId`
           },
           to: `${DbTableName.SERVICES}.id`
+        }
+      },
+      serviceProviders: {
+        relation: Model.ManyToManyRelation,
+        modelClass: UserModel,
+        join: {
+          from: `${DbTableName.WORKSHOPS}.id`,
+          through: {
+            from: `${DbTableName.SERVICE_PROVIDERS}.workshopId`,
+            to: `${DbTableName.SERVICE_PROVIDERS}.userId`
+          },
+          to: `${DbTableName.USERS}.id`
         }
       }
     };

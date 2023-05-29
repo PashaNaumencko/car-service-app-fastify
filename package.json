@@ -30,8 +30,5 @@
     "prettier": "2.8.8",
     "simple-git-hooks": "2.8.1",
     "typescript": "5.0.4"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
   }
 }

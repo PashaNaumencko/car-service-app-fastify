@@ -38,7 +38,7 @@ overrides:
       import/no-cycle:
         - off
   - files:
-    - knexfile.js
+      - knexfile.js
     rules:
       'import/no-default-export':
         - off

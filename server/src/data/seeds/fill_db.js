@@ -50,7 +50,15 @@ export async function seed(knex) {
         [ColumnName.ADMIN_ID]: users[getRandomIndex(users.length)].id,
         [ColumnName.IMAGE_ID]: workshopImages[idx] ? workshopImages[idx].id : null
       }));
-      await trx(TableName.WORKSHOPS).insert(workshopMappedSeed).returning('*');
+      const workshops = await trx(TableName.WORKSHOPS).insert(workshopMappedSeed).returning('*');
+
+      // // Add service providers
+      // const serviceProviderMappedSeed = workshopsSeeds.map((workshop, idx) => ({
+      //   ...workshop,
+      //   [ColumnName.ADMIN_ID]: users[getRandomIndex(users.length)].id,
+      //   [ColumnName.IMAGE_ID]: workshopImages[idx] ? workshopImages[idx].id : null
+      // }));
+      // const workshops = await trx(TableName.WORKSHOPS).insert(workshopMappedSeed).returning('*');
     });
   } catch (error) {
     console.log(`Seeding error: ${error}`);

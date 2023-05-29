@@ -1,12 +1,10 @@
 import { Model } from 'objection';
-import { join, resolve } from 'path';
 import { DbTableName } from '../../../common/enums/enums.js';
 import { Abstract as AbstractModel } from '../abstract/abstract.model.js';
 import { Workshop as WorkshopModel } from '../workshop/workshop.model.js';
 import { User as UserModel } from '../user/user.model.js';
 import { Car as CarModel } from '../cars/cars.model.js';
 import { Service as ServiceModel } from '../service/service.model.js';
-import { OrderToService as OrderToServiceModel } from '../order-to-service/order-to-service.model.js';
 
 class Order extends AbstractModel {
   static get tableName() {
@@ -36,13 +34,16 @@ class Order extends AbstractModel {
         yearOfProduction: { type: 'integer' },
         licensePlateNumber: { type: 'string' },
         visitDate: { type: 'string' },
+        noteByProvider: { type: 'string' },
         status: {
           type: 'string',
           enum: ['Requested', 'Accepted', 'Rejected', 'Completed'],
           default: 'Requested'
         },
         carId: { type: ['integer', 'null'] },
-        workshopId: { type: ['integer', 'null'] }
+        workshopId: { type: ['integer', 'null'] },
+        userId: { type: ['integer', 'null'] },
+        serviceProviderId: { type: ['integer', 'null'] }
       }
     };
   }
@@ -60,10 +61,19 @@ class Order extends AbstractModel {
       user: {
         relation: Model.HasOneRelation,
         modelClass: UserModel,
-        filter: query => query.select('id', 'username'),
+        filter: query => query.select('id', 'username', 'fullName'),
         join: {
-          from: `${DbTableName.WORKSHOPS}.userId`,
+          from: `${DbTableName.ORDERS}.userId`,
           to: `${DbTableName.USERS}.id`
+        }
+      },
+      serviceProvider: {
+        relation: Model.HasOneRelation,
+        modelClass: UserModel,
+        filter: query => query.select('id', 'username', 'fullName', 'phoneNumber'),
+        join: {
+          from: `${DbTableName.ORDERS}.serviceProviderId`,
+          to: `${DbTableName.SERVICE_PROVIDERS}.id`
         }
       },
       services: {

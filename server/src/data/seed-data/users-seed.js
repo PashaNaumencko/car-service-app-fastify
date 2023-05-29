@@ -4,10 +4,29 @@ const hash = password => encryptSync(password);
 
 const usersSeed = [
   {
-    email: 'demo@demo.com',
-    username: 'demo',
-    password: hash('demo'),
+    email: 'admin@demo.com',
+    username: 'admin',
+    password: hash('admin'),
     role: 'Admin'
+  },
+  {
+    email: 'pro1@demo.com',
+    username: 'pro1',
+    password: hash('pro'),
+    role: 'Service Provider'
+  },
+
+  {
+    email: 'pro2@demo.com',
+    username: 'pro2',
+    password: hash('pro'),
+    role: 'Service Provider'
+  },
+  {
+    email: 'user@demo.com',
+    username: 'user',
+    password: hash('user'),
+    role: 'User'
   },
   {
     email: 'gbottoms1@arizona.edu',

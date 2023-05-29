@@ -24,6 +24,10 @@ class User extends Abstract {
       .where({ id })
       .first();
   }
+
+  updateUserById(id, payload) {
+    return this.model.query().patch(payload).where({ id });
+  }
 }
 
 export { User };

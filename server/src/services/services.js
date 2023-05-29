@@ -5,7 +5,8 @@ import {
   order as orderRepository,
   service as serviceRepository,
   orderToService as orderToServiceRepository,
-  workshopToService as workshopToServiceRepository
+  workshopToService as workshopToServiceRepository,
+  serviceProvider as serviceProviderRepository
 } from '../data/repositories/repositories.js';
 import { Auth } from './auth/auth.service.js';
 import { User } from './user/user.service.js';
@@ -14,6 +15,7 @@ import { Car } from './car/car.service.js';
 import { Order } from './order/order.service.js';
 import { Service } from './service/service.service.js';
 import { OrderToService } from './order-to-service/order-to-service.service.js';
+import { ServiceProvider } from './service-provider/service-provider.service.js';
 
 const auth = new Auth({
   userRepository
@@ -45,4 +47,8 @@ const order = new Order({
   orderToServiceService: orderToService
 });
 
-export { auth, user, workshop, car, order, service, orderToService };
+const serviceProvider = new ServiceProvider({
+  serviceProviderRepository
+});
+
+export { auth, user, workshop, car, order, service, orderToService, serviceProvider };

@@ -1,5 +1,6 @@
 import { DbTableName } from '../../../common/enums/enums.js';
 import { Abstract as AbstractModel } from '../abstract/abstract.model.js';
+
 class OrderToService extends AbstractModel {
   static get tableName() {
     return DbTableName.ORDERS_TO_SERVICES;

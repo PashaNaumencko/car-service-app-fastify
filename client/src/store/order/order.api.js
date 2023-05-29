@@ -1,4 +1,4 @@
-import { HttpMethod, ApiPath, OrdersApiPath } from 'common/enums/enums';
+import { HttpMethod, ApiPath, OrdersApiPath, ServiceProvidersApiPath } from 'common/enums/enums';
 import { baseApi } from '../base-api';
 
 export const orderApi = baseApi.injectEndpoints({
@@ -33,8 +33,37 @@ export const orderApi = baseApi.injectEndpoints({
         body: { status }
       }),
       invalidatesTags: (result, error, { id }) => [{ type: 'Orders', id }]
+    }),
+    getProviders: build.query({
+      query: workshopId => ({
+        method: HttpMethod.GET,
+        url: `/service-providers/${workshopId}`
+      })
+    }),
+    assignProvider: build.mutation({
+      query: ({ id, serviceProviderId }) => ({
+        method: HttpMethod.PATCH,
+        url: `${ApiPath.ORDERS}/${id}${OrdersApiPath.ASSIGN_PROVIDER}`,
+        body: { serviceProviderId }
+      }),
+      invalidatesTags: (result, error, { id }) => [{ type: 'Orders', id }]
+    }),
+    completeOrder: build.mutation({
+      query: ({ id, noteByProvider }) => ({
+        method: HttpMethod.PATCH,
+        url: `${ApiPath.ORDERS}/${id}${OrdersApiPath.COMPLETE_ORDER}`,
+        body: { noteByProvider }
+      }),
+      invalidatesTags: (result, error, { id }) => [{ type: 'Orders', id }]
     })
   })
 });
 
-export const { useCreateOrderMutation, useChangeOrderStatusMutation, useGetOrdersQuery } = orderApi;
+export const {
+  useCreateOrderMutation,
+  useChangeOrderStatusMutation,
+  useGetOrdersQuery,
+  useAssignProviderMutation,
+  useCompleteOrderMutation,
+  useGetProvidersQuery
+} = orderApi;

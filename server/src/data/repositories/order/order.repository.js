@@ -9,8 +9,27 @@ class Order extends Abstract {
     return this.model
       .query()
       .select('orders.*')
-      .withGraphFetched('[workshop, car, services]')
+      .withGraphFetched('[workshop, car, services, serviceProvider]')
       .where({ userId })
+      .orderBy('createdAt', 'desc');
+  }
+
+  getOrdersByAdminId(adminId) {
+    return this.model
+      .query()
+      .select('orders.*')
+      .withGraphJoined('[workshop, car, services, serviceProvider]')
+      .where({ 'workshop.admin_id': adminId })
+      .orderBy('createdAt', 'desc');
+  }
+
+  getOrdersByServiceProviderId(serviceProviderId) {
+    // console.log('getOrdersByServiceProviderId', getOrdersByServiceProviderId);
+    return this.model
+      .query()
+      .select('orders.*')
+      .withGraphJoined('[workshop, car, services, serviceProvider]')
+      .where({ serviceProviderId })
       .orderBy('createdAt', 'desc');
   }
 
@@ -18,12 +37,12 @@ class Order extends Abstract {
     return this.model.query().patch({ status }).where({ id });
   }
 
-  assignProvider(id, serviceProviderId) {
+  assignServiceProvider(id, serviceProviderId) {
     return this.model.query().patch({ serviceProviderId }).where({ id });
   }
 
   completeOrder(id, noteByProvider) {
-    return this.model.query().patch({ noteByProvider }).where({ id });
+    return this.model.query().patch({ noteByProvider, status: 'Completed' }).where({ id });
   }
 }
 

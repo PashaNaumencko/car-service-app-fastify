@@ -7,7 +7,7 @@ const initOrders = (fastify, opts, done) => {
   fastify.route({
     method: HttpMethod.GET,
     url: OrdersApiPath.ROOT,
-    [ControllerHook.HANDLER]: req => orderService.getAllByUserId(req.user.id)
+    [ControllerHook.HANDLER]: req => orderService.getAllByUserId(req.user)
   });
 
   fastify.route({
@@ -43,7 +43,7 @@ const initOrders = (fastify, opts, done) => {
     url: `${OrdersApiPath.$ID}${OrdersApiPath.ASSIGN_PROVIDER}`,
     async [ControllerHook.HANDLER](req, res) {
       try {
-        const updatedOrder = await orderService.assignProvider(req.params.id, req.body);
+        const updatedOrder = await orderService.assignServiceProvider(req.params.id, req.body);
 
         return res.status(HttpCode.OK).send(updatedOrder);
       } catch (err) {

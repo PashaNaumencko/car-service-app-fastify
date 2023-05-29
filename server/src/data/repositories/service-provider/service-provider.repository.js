@@ -9,7 +9,7 @@ class ServiceProvider extends Abstract {
     return this.model
       .query()
       .select('serviceProviders.*')
-      .joinRelated('[workshop, user]')
+      .withGraphJoined('[workshop, user]')
       .where({ workshopId });
   }
 }

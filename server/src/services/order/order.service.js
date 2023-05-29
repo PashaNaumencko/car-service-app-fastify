@@ -1,3 +1,5 @@
+import { UserRole } from '../../common/enums/enums.js';
+
 class Order {
   constructor({ orderRepository, userRepository, orderToServiceService }) {
     this._orderRepository = orderRepository;
@@ -34,8 +36,17 @@ class Order {
     return this._orderRepository.completeOrder(id, noteByProvider);
   }
 
-  getAllByUserId(userId) {
-    return this._orderRepository.getOrdersByUserId(userId);
+  getAllByUserId(user) {
+    if (user.role === UserRole.ADMIN) {
+      return this._orderRepository.getOrdersByAdminId(user.id);
+    }
+
+    if (user.role === 'Service Provider') {
+      console.log('_orderRepository', this._orderRepository.getOrdersByServiceProviderId);
+      return this._orderRepository.getOrdersByServiceProviderId(user.id);
+    }
+
+    return this._orderRepository.getOrdersByUserId(user.id);
   }
 }
 

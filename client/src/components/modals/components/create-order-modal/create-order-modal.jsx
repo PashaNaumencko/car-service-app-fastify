@@ -26,7 +26,7 @@ const CreateOrderModal = () => {
   }
 
   return (
-    <Dialog open onClose={handleClose} PaperProps={{ sx: { minWidth: 870 } }}>
+    <Dialog open onClose={handleClose} PaperProps={{ sx: { minWidth: 1070 } }}>
       <StyledModalHeader>
         {activeStep > 0 ? (
           <StyledIconButton direction={ButtonDirection.LEFT} onClick={handleBack}>
@@ -40,9 +40,7 @@ const CreateOrderModal = () => {
         </StyledIconButton>
       </StyledModalHeader>
 
-      {/* <DialogContent sx={{ padding: '16px' }}> */}
       <CreateOrderForm cars={cars} services={services} workshopId={workshop?.id} />
-      {/* </DialogContent> */}
     </Dialog>
   );
 };

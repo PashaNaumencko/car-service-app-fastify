@@ -4,11 +4,14 @@ export const DEFAULT_CREATE_ORDER_FORM_PAYLOAD = {
   carId: '',
   model: '',
   yearOfProduction: null,
-  licensePlateNumber: ''
+  licensePlateNumber: '',
+  phoneNumber: '',
+  fullName: ''
 };
 
 export const CREATE_ORDER_FORM_STEPS = [
   'Обери послугу',
   'Заповни інформацію про автомобіль',
-  'Обери дату візиту'
+  'Обери дату візиту',
+  'Заповніть контактні дані'
 ];

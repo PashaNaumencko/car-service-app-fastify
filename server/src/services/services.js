@@ -44,7 +44,8 @@ const orderToService = new OrderToService({
 
 const order = new Order({
   orderRepository,
-  orderToServiceService: orderToService
+  orderToServiceService: orderToService,
+  userRepository
 });
 
 const serviceProvider = new ServiceProvider({

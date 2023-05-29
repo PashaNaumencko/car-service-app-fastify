@@ -1,11 +1,11 @@
 import { LocalPhone as LocalPhoneIcon } from '@mui/icons-material';
 import { Button, Stack, Typography } from '@mui/material';
-import { AppRoute } from 'common/enums/enums';
+import { AppRoute, UserRole } from 'common/enums/enums';
 import { Image } from 'components/common/common';
 import { memo } from 'react';
 import { StyledCard, StyledCardContent, StyledWorkshopLink } from './workshop-card.styles';
 
-const WorkshopCard = memo(({ onOpenOrderForm, workshop }) => {
+const WorkshopCard = memo(({ onOpenOrderForm, workshop, userRole }) => {
   return (
     <StyledCard>
       <StyledCardContent>
@@ -38,9 +38,11 @@ const WorkshopCard = memo(({ onOpenOrderForm, workshop }) => {
             >
               {workshop.description}
             </Typography>
-            <Button size="large" variant="outlined" color="primary" onClick={onOpenOrderForm}>
-              Забронювати візит
-            </Button>
+            {userRole === UserRole.USER ? (
+              <Button size="large" variant="outlined" color="primary" onClick={onOpenOrderForm}>
+                Забронювати візит
+              </Button>
+            ) : null}
           </Stack>
         </Stack>
       </StyledCardContent>

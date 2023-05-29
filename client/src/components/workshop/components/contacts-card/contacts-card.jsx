@@ -4,10 +4,11 @@ import {
   LocationOnOutlined as LocationOnIcon
 } from '@mui/icons-material';
 import { Button, Card, CardContent, Stack, Typography } from '@mui/material';
+import { UserRole } from 'common/enums/enums';
 import { memo } from 'react';
 import { ContactsIconWrapper } from './contacts-card.styles';
 
-const ContactsCard = memo(({ name, address, phoneNumber, website, onOpenOrderForm }) => {
+const ContactsCard = memo(({ userRole, name, address, phoneNumber, website, onOpenOrderForm }) => {
   return (
     <Card>
       <CardContent sx={{ padding: 4 }}>
@@ -21,15 +22,18 @@ const ContactsCard = memo(({ name, address, phoneNumber, website, onOpenOrderFor
           </Typography>
         </Stack>
 
-        <Button
-          fullWidth
-          color="primary"
-          variant="contained"
-          sx={{ textTransform: 'uppercase', marginBottom: 6 }}
-          onClick={onOpenOrderForm}
-        >
-          Забронювати візит
-        </Button>
+        {userRole === UserRole.USER ? (
+          <Button
+            fullWidth
+            color="primary"
+            variant="contained"
+            sx={{ textTransform: 'uppercase', marginBottom: 6 }}
+            onClick={onOpenOrderForm}
+          >
+            Забронювати візит
+          </Button>
+        ) : null}
+
         <Typography variant="h6" marginBottom={3}>
           Контакти
         </Typography>

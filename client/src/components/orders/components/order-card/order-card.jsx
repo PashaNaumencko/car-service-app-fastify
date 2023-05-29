@@ -29,92 +29,108 @@ const statusLabels = {
   }
 };
 
-const OrderCard = memo(({ order, userRole, onChangeStatus }) => {
-  return (
-    <StyledCard>
-      <StyledCardContent>
-        <Stack direction="column" gap={2} sx={{ width: '100%' }}>
-          <Stack direction="row" justifyContent="space-between" alignItems="center">
-            <Box>
-              <Typography variant="h5" marginBottom={2}>
-                {order.car.brand} {order.model}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" marginBottom={2}>
-                Рік випуску: {order.yearOfProduction}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" marginBottom={2}>
-                Номерний знак: {order.licensePlateNumber}
-              </Typography>
-              <Stack direction="row" gap={4} alignItems="center" marginBottom={4}>
-                <CalendarMonthRoundedIcon />
-                <Typography variant="body2" color="text.secondary">
-                  Дата візиту: {moment(order.visitDate).format('MMMM Do, YYYY HH:mm')}
+const OrderCard = memo(
+  ({ order, userRole, onChangeStatus, onAssignProviderModalOpen, onCompleteOrderModalOpen }) => {
+    return (
+      <StyledCard>
+        <StyledCardContent>
+          <Stack direction="column" gap={2} sx={{ width: '100%' }}>
+            <Stack direction="row" justifyContent="space-between" alignItems="center">
+              <Box>
+                <Typography variant="h5" marginBottom={2}>
+                  {order.car.brand} {order.model}
                 </Typography>
-              </Stack>
-            </Box>
-            <Chip
-              label={statusLabels[order.status].title}
-              color={statusLabels[order.status].color}
-            />
-          </Stack>
+                <Typography variant="body2" color="text.secondary" marginBottom={2}>
+                  Рік випуску: {order.yearOfProduction}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" marginBottom={2}>
+                  Номерний знак: {order.licensePlateNumber}
+                </Typography>
+                <Stack direction="row" gap={4} alignItems="center" marginBottom={4}>
+                  <CalendarMonthRoundedIcon />
+                  <Typography variant="body2" color="text.secondary">
+                    Дата візиту: {moment(order.visitDate).format('MMMM Do, YYYY HH:mm')}
+                  </Typography>
+                </Stack>
+              </Box>
+              <Chip
+                label={statusLabels[order.status].title}
+                color={statusLabels[order.status].color}
+              />
+            </Stack>
 
-          <Stack direction="column" spacing={2} maxWidth="30%">
-            <Typography variant="body2" color="text.secondary" marginBottom={2}>
-              Обрані послуги:
-            </Typography>
-            {order.services.map(service => (
-              <Chip key={service.id} label={service.title} color="secondary" />
-            ))}
-          </Stack>
+            <Stack direction="column" spacing={2} maxWidth="30%">
+              <Typography variant="body2" color="text.secondary" marginBottom={2}>
+                Обрані послуги:
+              </Typography>
+              {order.services.map(service => (
+                <Chip key={service.id} label={service.title} color="secondary" />
+              ))}
+            </Stack>
 
-          <Stack direction="row" justifyContent="space-between" gap={4} marginTop={5}>
-            <Typography variant="body2" color="text.primary">
-              {order.description}
-            </Typography>
-          </Stack>
-          {userRole === UserRole.ADMIN ? (
-            <Stack direction="row-reverse" alignItems="center" gap={4} marginTop={5}>
-              {order.status === OrderStatus.REQUESTED ? (
-                <>
-                  <Button
-                    size="large"
-                    startIcon={<CancelRoundedIcon />}
-                    variant="outlined"
-                    color="error"
-                    onClick={onChangeStatus({ id: order.id, status: OrderStatus.REJECTED })}
-                  >
-                    Відхилити
-                  </Button>
+            <Stack direction="row" justifyContent="space-between" gap={4} marginTop={5}>
+              <Typography variant="body2" color="text.primary">
+                {order.description}
+              </Typography>
+            </Stack>
+            {userRole === UserRole.ADMIN ? (
+              <Stack direction="row-reverse" alignItems="center" gap={4} marginTop={5}>
+                {order.status === OrderStatus.REQUESTED ? (
+                  <>
+                    <Button
+                      size="large"
+                      startIcon={<CancelRoundedIcon />}
+                      variant="outlined"
+                      color="error"
+                      onClick={onChangeStatus({ id: order.id, status: OrderStatus.REJECTED })}
+                    >
+                      Відхилити
+                    </Button>
+                    <Button
+                      size="large"
+                      startIcon={<AddRoundedIcon />}
+                      variant="contained"
+                      color="primary"
+                      onClick={onChangeStatus({ id: order.id, status: OrderStatus.ACCEPTED })}
+                    >
+                      Прийняти
+                    </Button>
+                  </>
+                ) : null}
+
+                {order.status === OrderStatus.ACCEPTED && !order.serviceProviderId ? (
                   <Button
                     size="large"
                     startIcon={<AddRoundedIcon />}
                     variant="contained"
                     color="primary"
-                    onClick={onChangeStatus({ id: order.id, status: OrderStatus.ACCEPTED })}
+                    onClick={onAssignProviderModalOpen}
                   >
-                    Прийняти
+                    Назначити майстра
                   </Button>
-                </>
-              ) : null}
+                ) : null}
+              </Stack>
+            ) : null}
 
-              {order.status === OrderStatus.ACCEPTED ? (
+            {userRole === 'Service Provider' && order.status !== OrderStatus.COMPLETED ? (
+              <Stack direction="row-reverse" alignItems="center" gap={4} marginTop={5}>
                 <Button
                   size="large"
-                  startIcon={<CheckRoundedIcon />}
+                  startIcon={<AddRoundedIcon />}
                   variant="contained"
-                  color="success"
-                  onClick={onChangeStatus({ id: order.id, status: OrderStatus.COMPLETED })}
+                  color="primary"
+                  onClick={onCompleteOrderModalOpen}
                 >
-                  Виконати
+                  Виконати роботу
                 </Button>
-              ) : null}
-            </Stack>
-          ) : null}
-        </Stack>
-      </StyledCardContent>
-    </StyledCard>
-  );
-});
+              </Stack>
+            ) : null}
+          </Stack>
+        </StyledCardContent>
+      </StyledCard>
+    );
+  }
+);
 
 OrderCard.displayName = 'OrderCard';
 

@@ -3,7 +3,12 @@ import { useAppForm, useModal, useStepper } from 'hooks/hooks';
 import { FormProvider } from 'react-hook-form';
 import { notification as notificationService } from 'services/services';
 import { useCreateOrderMutation } from 'store/order/order';
-import { ChooseServiceStep, ChooseVisitDate, FillCarInfo } from './components/components';
+import {
+  ChooseServiceStep,
+  ChooseVisitDate,
+  FillCarInfo,
+  FillUserInfo
+} from './components/components';
 import { CREATE_ORDER_FORM_STEPS, DEFAULT_CREATE_ORDER_FORM_PAYLOAD } from './constants';
 
 const CreateOrderForm = ({ cars, services, workshopId }) => {
@@ -42,7 +47,8 @@ const CreateOrderForm = ({ cars, services, workshopId }) => {
         </Stepper>
         {activeStep === 0 ? <ChooseServiceStep serviceOptions={services} /> : null}
         {activeStep === 1 ? <FillCarInfo carOptions={cars} /> : null}
-        {activeStep === 2 ? <ChooseVisitDate isLoading={isLoading} /> : null}
+        {activeStep === 2 ? <ChooseVisitDate /> : null}
+        {activeStep === 3 ? <FillUserInfo isLoading={isLoading} /> : null}
       </Box>
     </FormProvider>
   );

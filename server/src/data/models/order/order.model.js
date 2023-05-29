@@ -5,6 +5,7 @@ import { Workshop as WorkshopModel } from '../workshop/workshop.model.js';
 import { User as UserModel } from '../user/user.model.js';
 import { Car as CarModel } from '../cars/cars.model.js';
 import { Service as ServiceModel } from '../service/service.model.js';
+import { ServiceProvider as ServiceProviderModel } from '../service-provider/service-provider.model.js';
 
 class Order extends AbstractModel {
   static get tableName() {
@@ -69,8 +70,8 @@ class Order extends AbstractModel {
       },
       serviceProvider: {
         relation: Model.HasOneRelation,
-        modelClass: UserModel,
-        filter: query => query.select('id', 'username', 'fullName', 'phoneNumber'),
+        modelClass: ServiceProviderModel,
+        // filter: query => query.select('id', 'username', 'fullName', 'phoneNumber'),
         join: {
           from: `${DbTableName.ORDERS}.serviceProviderId`,
           to: `${DbTableName.SERVICE_PROVIDERS}.id`

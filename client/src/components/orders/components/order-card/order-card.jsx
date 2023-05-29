@@ -2,7 +2,8 @@ import {
   AddRounded as AddRoundedIcon,
   CalendarMonthRounded as CalendarMonthRoundedIcon,
   CancelRounded as CancelRoundedIcon,
-  CheckRounded as CheckRoundedIcon
+  CheckRounded as CheckRoundedIcon,
+  AccountCircleRounded as AccountCircleRoundedIcon
 } from '@mui/icons-material';
 import { Box, Button, Chip, Stack, Typography } from '@mui/material';
 import { OrderStatus, UserRole } from 'common/enums/enums';
@@ -52,6 +53,14 @@ const OrderCard = memo(
                     Дата візиту: {moment(order.visitDate).format('MMMM Do, YYYY HH:mm')}
                   </Typography>
                 </Stack>
+                {order.user.fullName && order.user.phoneNumber ? (
+                  <Stack direction="row" gap={4} alignItems="center" marginBottom={4}>
+                    <AccountCircleRoundedIcon />
+                    <Typography variant="body2" color="text.secondary">
+                      Контактні дані клієнта: {order.user.fullName} {order.user.phoneNumber}
+                    </Typography>
+                  </Stack>
+                ) : null}
               </Box>
               <Chip
                 label={statusLabels[order.status].title}
@@ -73,6 +82,14 @@ const OrderCard = memo(
                 {order.description}
               </Typography>
             </Stack>
+            {order.noteByProvider ? (
+              <Stack direction="row" justifyContent="space-between" gap={4} marginTop={5}>
+                <Typography variant="body2" color="text.primary">
+                  Нотатки від майстра: {order.noteByProvider}
+                </Typography>
+              </Stack>
+            ) : null}
+
             {userRole === UserRole.ADMIN ? (
               <Stack direction="row-reverse" alignItems="center" gap={4} marginTop={5}>
                 {order.status === OrderStatus.REQUESTED ? (
@@ -116,9 +133,9 @@ const OrderCard = memo(
               <Stack direction="row-reverse" alignItems="center" gap={4} marginTop={5}>
                 <Button
                   size="large"
-                  startIcon={<AddRoundedIcon />}
+                  startIcon={<CheckRoundedIcon />}
                   variant="contained"
-                  color="primary"
+                  color="success"
                   onClick={onCompleteOrderModalOpen}
                 >
                   Виконати роботу

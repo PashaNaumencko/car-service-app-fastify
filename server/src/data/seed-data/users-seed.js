@@ -13,14 +13,16 @@ const usersSeed = [
     email: 'pro1@demo.com',
     username: 'pro1',
     password: hash('pro'),
-    role: 'Service Provider'
+    role: 'Service Provider',
+    fullName: 'Петро Петренко'
   },
 
   {
     email: 'pro2@demo.com',
     username: 'pro2',
     password: hash('pro'),
-    role: 'Service Provider'
+    role: 'Service Provider',
+    fullName: 'Микола Миколенко'
   },
   {
     email: 'user@demo.com',

@@ -16,7 +16,7 @@ const CompleteOrderForm = ({ orderId }) => {
   const handleCompleteOrder = async values => {
     await completeOrder({
       id: orderId,
-      noteByProvider: values.serviceProviderId
+      noteByProvider: values.noteByProvider
     }).unwrap();
     notificationService.success('Замовлення відмічено як виконане');
     handleCloseModal();

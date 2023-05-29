@@ -10,6 +10,8 @@ const login = createAsyncThunk(
     // try {
     const { data } = await dispatch(authApi.endpoints.login.initiate(payload));
 
+    // const {  await dispatch(loadCurrentUser()).unwrap()
+
     services.storage.setItem(StorageKey.TOKEN, data.token);
 
     return data.user;

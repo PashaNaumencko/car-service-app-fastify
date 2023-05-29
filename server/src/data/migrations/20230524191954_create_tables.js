@@ -28,6 +28,7 @@ const ColumnName = {
   PRICE: 'price',
   BRAND: 'brand',
   MODEL: 'model',
+  NOTE_BY_PROVIDER: 'note_by_provider',
   YEAR_OF_PRODUCTION: 'yearOfProduction',
   LICENSE_PLATE_NUMBER: 'licensePlateNumber',
   VISIT_DATE: 'visitDate',
@@ -76,6 +77,7 @@ export async function up(knex) {
     table.increments(ColumnName.ID).primary();
     table.text(ColumnName.DESCRIPTION).notNullable();
     table.string(ColumnName.MODEL).notNullable();
+    table.string(ColumnName.NOTE_BY_PROVIDER);
     table.integer(ColumnName.YEAR_OF_PRODUCTION).notNullable();
     table.string(ColumnName.LICENSE_PLATE_NUMBER).notNullable().unique();
     table.dateTime(ColumnName.VISIT_DATE).notNullable();

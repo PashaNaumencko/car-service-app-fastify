@@ -30,6 +30,8 @@ const App = () => {
   const hasToken = Boolean(storage.getItem(StorageKey.TOKEN));
   const hasUser = Boolean(user);
 
+  console.log('user', user);
+
   const handleUserLogout = useCallback(() => dispatch(authActionCreator.logout()), [dispatch]);
 
   const handleSideMenuOpen = useCallback(() => {
@@ -49,6 +51,7 @@ const App = () => {
   if (hasToken && !hasUser) {
     return <LoadingContainer height="100vh" />;
   }
+
   return (
     <>
       {hasUser && (

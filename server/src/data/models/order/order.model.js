@@ -62,7 +62,7 @@ class Order extends AbstractModel {
       user: {
         relation: Model.HasOneRelation,
         modelClass: UserModel,
-        filter: query => query.select('id', 'username', 'fullName'),
+        filter: query => query.select('id', 'username', 'fullName', 'phoneNumber'),
         join: {
           from: `${DbTableName.ORDERS}.userId`,
           to: `${DbTableName.USERS}.id`

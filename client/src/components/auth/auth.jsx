@@ -27,8 +27,6 @@ const Auth = () => {
     [dispatch]
   );
 
-  console.log('error', error);
-
   const getScreen = path => {
     switch (path) {
       case AppRoute.LOGIN: {

@@ -4,6 +4,6 @@ export {
   WorkshopsApiPath,
   CarsApiPath,
   ServicesApiPath,
-  OrdersApiPath
-  // ServiceProvidersApiPath
+  OrdersApiPath,
+  ServiceProvidersApiPath
 } from 'shared/src/common/enums/enums.js';

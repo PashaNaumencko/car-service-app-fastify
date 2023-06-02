@@ -20,7 +20,16 @@ class User extends Abstract {
   getUserById(id) {
     return this.model
       .query()
-      .select('id', 'createdAt', 'email', 'role', 'updatedAt', 'username')
+      .select(
+        'id',
+        'createdAt',
+        'email',
+        'role',
+        'updatedAt',
+        'username',
+        'fullName',
+        'phoneNumber'
+      )
       .where({ id })
       .first();
   }

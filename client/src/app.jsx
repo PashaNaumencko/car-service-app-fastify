@@ -30,8 +30,6 @@ const App = () => {
   const hasToken = Boolean(storage.getItem(StorageKey.TOKEN));
   const hasUser = Boolean(user);
 
-  console.log('user', user);
-
   const handleUserLogout = useCallback(() => dispatch(authActionCreator.logout()), [dispatch]);
 
   const handleSideMenuOpen = useCallback(() => {

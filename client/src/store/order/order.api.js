@@ -37,7 +37,7 @@ export const orderApi = baseApi.injectEndpoints({
     getProviders: build.query({
       query: workshopId => ({
         method: HttpMethod.GET,
-        url: `/service-providers/${workshopId}`
+        url: `${ApiPath.SERVICE_PROVIDERS}/${workshopId}`
       })
     }),
     assignProvider: build.mutation({

@@ -36,7 +36,7 @@ const AssignProviderForm = ({ orderId, workshopId }) => {
           name="serviceProviderId"
           label=""
           options={serviceProviders.map(serviceProvider => ({
-            id: serviceProvider.user.id,
+            id: serviceProvider.id,
             fullName: serviceProvider.user.fullName
           }))}
           selectedValueLabelName="fullName"

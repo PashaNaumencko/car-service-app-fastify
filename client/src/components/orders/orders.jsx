@@ -1,11 +1,11 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { ModalVariant, UserRole } from 'common/enums/enums';
 import { LoadingContainer } from 'components/common/common';
+import { useModal } from 'hooks/hooks';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useChangeOrderStatusMutation, useGetOrdersQuery } from 'store/order/order';
 import { OrderCard } from './components/components';
-import { useModal } from 'hooks/hooks';
 
 const Orders = () => {
   const { user } = useSelector(state => ({
@@ -41,31 +41,28 @@ const Orders = () => {
   }
 
   return (
-    <>
-      <Stack direction="column" gap={8} padding={4} sx={{ width: '100%' }}>
-        {orders.length ? (
-          orders.map(order => (
-            <>
-              <Typography variant="h2" color="text.primary" marginBottom={4}>
-                {user.role === UserRole.ADMIN ? 'Замовлення майстерні' : 'Мої замовлення'}
-              </Typography>
-              <OrderCard
-                key={order.id}
-                order={order}
-                userRole={user.role}
-                onChangeStatus={handleChangeOrderStatus}
-                onAssignProviderModalOpen={handleOpenAssignProviderModal(order)}
-                onCompleteOrderModalOpen={handleCompleteOrderModalOpen(order)}
-              />
-            </>
-          ))
-        ) : (
-          <Typography variant="h6" color="text.primary" marginBottom={4} align="center">
-            На даний момент ви не зробили жодного замовлення
-          </Typography>
-        )}
-      </Stack>
-    </>
+    <Stack direction="column" gap={8} padding={4} sx={{ width: '100%' }}>
+      <Typography variant="h2" color="text.primary" marginBottom={4}>
+        {user.role === UserRole.ADMIN ? 'Замовлення майстерні' : 'Мої замовлення'}
+      </Typography>
+      {orders.length ? (
+        orders.map(order => (
+          <OrderCard
+            key={order.id}
+            order={order}
+            userRole={user.role}
+            userId={user.id}
+            onChangeStatus={handleChangeOrderStatus}
+            onAssignProviderModalOpen={handleOpenAssignProviderModal(order)}
+            onCompleteOrderModalOpen={handleCompleteOrderModalOpen(order)}
+          />
+        ))
+      ) : (
+        <Typography variant="h6" color="text.primary" marginBottom={4} align="center">
+          На даний момент ви не зробили жодного замовлення
+        </Typography>
+      )}
+    </Stack>
   );
 };
 

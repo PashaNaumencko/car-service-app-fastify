@@ -32,7 +32,7 @@ const SideMenu = ({ isOpen, onClose, userRole }) => {
       </StyledDrawerHeader>
       <Divider />
       <List>
-        {userRole === 'Service Provider' ? (
+        {userRole !== UserRole.SERVICE_PROVIDER ? (
           <ListItem disablePadding sx={{ display: 'block' }}>
             <Link
               component={NavLink}

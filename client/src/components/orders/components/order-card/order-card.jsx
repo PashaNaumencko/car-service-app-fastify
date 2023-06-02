@@ -61,6 +61,14 @@ const OrderCard = memo(
                     </Typography>
                   </Stack>
                 ) : null}
+                {order.serviceProviderId ? (
+                  <Stack direction="row" gap={4} alignItems="center" marginBottom={4}>
+                    <AccountCircleRoundedIcon />
+                    <Typography variant="body2" color="text.secondary">
+                      Імʼя майстра: {order?.serviceProvider?.user?.fullName}
+                    </Typography>
+                  </Stack>
+                ) : null}
               </Box>
               <Chip
                 label={statusLabels[order.status].title}
@@ -129,7 +137,7 @@ const OrderCard = memo(
               </Stack>
             ) : null}
 
-            {userRole === 'Service Provider' && order.status !== OrderStatus.COMPLETED ? (
+            {userRole === UserRole.SERVICE_PROVIDER && order.status !== OrderStatus.COMPLETED ? (
               <Stack direction="row-reverse" alignItems="center" gap={4} marginTop={5}>
                 <Button
                   size="large"

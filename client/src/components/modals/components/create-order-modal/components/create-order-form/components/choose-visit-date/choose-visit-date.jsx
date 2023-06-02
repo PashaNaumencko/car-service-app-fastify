@@ -1,9 +1,9 @@
 import { DatePicker } from 'components/common/common';
 import { useFormContext } from 'react-hook-form';
 import { useStepper } from 'hooks/hooks';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography, CircularProgress } from '@mui/material';
 
-const ChooseVisitDate = () => {
+const ChooseVisitDate = ({ isLoading, isContactInfoFilled }) => {
   const { control, watch } = useFormContext();
   const { handleNext } = useStepper();
 
@@ -21,16 +21,30 @@ const ChooseVisitDate = () => {
         <DatePicker control={control} name="visitDate" label="Оберіть дату і час" />
       </Box>
 
-      <Button
-        variant="contained"
-        color="primary"
-        fullWidth
-        disabled={!visitDate}
-        onClick={handleNext}
-        sx={{ textTransform: 'uppercase', maxWidth: 500, marginTop: 3 }}
-      >
-        Далі
-      </Button>
+      {isContactInfoFilled ? (
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={!visitDate || isLoading}
+          fullWidth
+          type="submit"
+          form="hook-form"
+          sx={{ textTransform: 'uppercase', maxWidth: 500, marginTop: 3 }}
+        >
+          {isLoading ? <CircularProgress size={20} /> : 'Далі'}
+        </Button>
+      ) : (
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          disabled={!visitDate}
+          onClick={handleNext}
+          sx={{ textTransform: 'uppercase', maxWidth: 500, marginTop: 3 }}
+        >
+          Далі
+        </Button>
+      )}
     </Stack>
   );
 };

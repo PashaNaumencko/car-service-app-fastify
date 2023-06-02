@@ -79,7 +79,7 @@ export async function up(knex) {
     table.string(ColumnName.MODEL).notNullable();
     table.string(ColumnName.NOTE_BY_PROVIDER);
     table.integer(ColumnName.YEAR_OF_PRODUCTION).notNullable();
-    table.string(ColumnName.LICENSE_PLATE_NUMBER).notNullable().unique();
+    table.string(ColumnName.LICENSE_PLATE_NUMBER).notNullable();
     table.dateTime(ColumnName.VISIT_DATE).notNullable();
     table.string(ColumnName.STATUS).notNullable().default('Requested');
     table.dateTime(ColumnName.CREATED_AT).notNullable().defaultTo(knex.fn.now());
@@ -96,7 +96,7 @@ export async function up(knex) {
   await knex.schema.createTable(TableName.ORDERS_TO_SERVICES, table => {
     table.increments(ColumnName.ID).primary();
     table.integer(ColumnName.ORDER_ID).notNullable();
-    table.integer(ColumnName.SERVICE_ID).notNullable().unique();
+    table.integer(ColumnName.SERVICE_ID).notNullable();
     table.dateTime(ColumnName.CREATED_AT).notNullable().defaultTo(knex.fn.now());
     table.dateTime(ColumnName.UPDATED_AT).notNullable().defaultTo(knex.fn.now());
   });
@@ -112,14 +112,14 @@ export async function up(knex) {
   await knex.schema.createTable(TableName.WORKSHOPS_TO_SERVICES, table => {
     table.increments(ColumnName.ID).primary();
     table.integer(ColumnName.WORKSHOP_ID).notNullable();
-    table.integer(ColumnName.SERVICE_ID).notNullable().unique();
+    table.integer(ColumnName.SERVICE_ID).notNullable();
     table.dateTime(ColumnName.CREATED_AT).notNullable().defaultTo(knex.fn.now());
     table.dateTime(ColumnName.UPDATED_AT).notNullable().defaultTo(knex.fn.now());
   });
 
   await knex.schema.createTable(TableName.SERVICES, table => {
     table.increments(ColumnName.ID).primary();
-    table.string(ColumnName.TITLE).notNullable().unique();
+    table.string(ColumnName.TITLE).notNullable();
     table.integer(ColumnName.PRICE).notNullable();
     table.dateTime(ColumnName.CREATED_AT).notNullable().defaultTo(knex.fn.now());
     table.dateTime(ColumnName.UPDATED_AT).notNullable().defaultTo(knex.fn.now());

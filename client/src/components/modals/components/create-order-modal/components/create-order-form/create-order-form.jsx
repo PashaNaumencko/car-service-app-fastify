@@ -1,6 +1,8 @@
 import { Box, Step, StepLabel, Stepper } from '@mui/material';
 import { useAppForm, useModal, useStepper } from 'hooks/hooks';
+import { useMemo } from 'react';
 import { FormProvider } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { notification as notificationService } from 'services/services';
 import { useCreateOrderMutation } from 'store/order/order';
 import {
@@ -9,9 +11,12 @@ import {
   FillCarInfo,
   FillUserInfo
 } from './components/components';
-import { CREATE_ORDER_FORM_STEPS, DEFAULT_CREATE_ORDER_FORM_PAYLOAD } from './constants';
+import { DEFAULT_CREATE_ORDER_FORM_PAYLOAD, getFormSteps } from './constants';
 
 const CreateOrderForm = ({ cars, services, workshopId }) => {
+  const { user } = useSelector(state => ({
+    user: state.auth.user
+  }));
   const { activeStep } = useStepper();
   const { handleClose: handleCloseModal } = useModal();
   const methods = useAppForm({
@@ -29,6 +34,10 @@ const CreateOrderForm = ({ cars, services, workshopId }) => {
     handleCloseModal();
   };
 
+  const isContactInfoFilled = Boolean(user.phoneNumber) && Boolean(user.fullName);
+
+  const steps = useMemo(() => getFormSteps(isContactInfoFilled), [isContactInfoFilled]);
+
   return (
     <FormProvider {...methods}>
       <Box
@@ -39,7 +48,7 @@ const CreateOrderForm = ({ cars, services, workshopId }) => {
         sx={{ padding: 5 }}
       >
         <Stepper activeStep={activeStep} sx={{ marginBottom: 10 }}>
-          {CREATE_ORDER_FORM_STEPS.map(label => (
+          {steps.map(label => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
             </Step>
@@ -48,7 +57,7 @@ const CreateOrderForm = ({ cars, services, workshopId }) => {
         {activeStep === 0 ? <ChooseServiceStep serviceOptions={services} /> : null}
         {activeStep === 1 ? <FillCarInfo carOptions={cars} /> : null}
         {activeStep === 2 ? <ChooseVisitDate /> : null}
-        {activeStep === 3 ? <FillUserInfo isLoading={isLoading} /> : null}
+        {activeStep === 3 && !isContactInfoFilled ? <FillUserInfo isLoading={isLoading} /> : null}
       </Box>
     </FormProvider>
   );

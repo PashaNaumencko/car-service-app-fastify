@@ -6,11 +6,12 @@ class Order extends Abstract {
   }
 
   getOrdersByUserId(userId) {
+    console.log('userId', userId);
     return this.model
       .query()
       .select('orders.*')
-      .withGraphFetched('[workshop, car, services, user, serviceProvider]')
-      .where({ userId })
+      .withGraphJoined('[workshop, car, services, user, serviceProvider]')
+      .where({ 'user.id': userId })
       .orderBy('createdAt', 'desc');
   }
 
@@ -19,7 +20,7 @@ class Order extends Abstract {
       .query()
       .select('orders.*')
       .withGraphJoined('[workshop, car, services, user, serviceProvider]')
-      .where({ 'workshop.admin_id': adminId })
+      .where({ 'workshop.adminId': adminId })
       .orderBy('createdAt', 'desc');
   }
 
@@ -28,7 +29,7 @@ class Order extends Abstract {
       .query()
       .select('orders.*')
       .withGraphJoined('[workshop, car, services, user, serviceProvider]')
-      .where({ serviceProviderId })
+      .where({ 'serviceProvider.userId': serviceProviderId })
       .orderBy('createdAt', 'desc');
   }
 

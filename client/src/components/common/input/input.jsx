@@ -43,6 +43,11 @@ const Input = ({
         value={field.value}
         InputProps={{ endAdornment }}
         onChange={handleChange}
+        onKeyPress={event => {
+          if (event?.key === '-' || event?.key === '+') {
+            event.preventDefault();
+          }
+        }}
         helperText={error?.message}
         error={Boolean(error?.message)}
       />

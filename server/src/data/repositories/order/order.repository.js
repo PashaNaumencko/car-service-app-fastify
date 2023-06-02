@@ -6,13 +6,15 @@ class Order extends Abstract {
   }
 
   getOrdersByUserId(userId) {
-    console.log('userId', userId);
-    return this.model
-      .query()
-      .select('orders.*')
-      .withGraphJoined('[workshop, car, services, user, serviceProvider]')
-      .where({ 'user.id': userId })
-      .orderBy('createdAt', 'desc');
+    return (
+      this.model
+        .query()
+        .select('orders.*')
+        .withGraphJoined('[workshop, car, services, user, serviceProvider]')
+        // .withGraphFetched('[serviceProvider.user]')
+        .where({ 'user.id': userId })
+        .orderBy('createdAt', 'desc')
+    );
   }
 
   getOrdersByAdminId(adminId) {

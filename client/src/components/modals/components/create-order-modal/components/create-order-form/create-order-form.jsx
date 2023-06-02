@@ -2,8 +2,9 @@ import { Box, Step, StepLabel, Stepper } from '@mui/material';
 import { useAppForm, useModal, useStepper } from 'hooks/hooks';
 import { useMemo } from 'react';
 import { FormProvider } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { notification as notificationService } from 'services/services';
+import { authActionCreator } from 'store/auth/auth';
 import { useCreateOrderMutation } from 'store/order/order';
 import {
   ChooseServiceStep,
@@ -14,6 +15,7 @@ import {
 import { DEFAULT_CREATE_ORDER_FORM_PAYLOAD, getFormSteps } from './constants';
 
 const CreateOrderForm = ({ cars, services, workshopId }) => {
+  const dispatch = useDispatch();
   const { user } = useSelector(state => ({
     user: state.auth.user
   }));
@@ -30,6 +32,7 @@ const CreateOrderForm = ({ cars, services, workshopId }) => {
       services: values.services.map(({ id, title, price }) => ({ id, title, price })),
       workshopId
     }).unwrap();
+    await dispatch(authActionCreator.loadCurrentUser()).unwrap();
     notificationService.success('Ваше замовлення успішно створено');
     handleCloseModal();
   };
@@ -56,7 +59,7 @@ const CreateOrderForm = ({ cars, services, workshopId }) => {
         </Stepper>
         {activeStep === 0 ? <ChooseServiceStep serviceOptions={services} /> : null}
         {activeStep === 1 ? <FillCarInfo carOptions={cars} /> : null}
-        {activeStep === 2 ? <ChooseVisitDate /> : null}
+        {activeStep === 2 ? <ChooseVisitDate isContactInfoFilled={isContactInfoFilled} /> : null}
         {activeStep === 3 && !isContactInfoFilled ? <FillUserInfo isLoading={isLoading} /> : null}
       </Box>
     </FormProvider>

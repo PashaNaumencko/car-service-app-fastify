@@ -17,7 +17,9 @@ class Order {
       });
     });
 
-    await this._userRepository.updateUserById(createdOrder.userId, { fullName, phoneNumber });
+    if (fullName && phoneNumber) {
+      await this._userRepository.updateUserById(createdOrder.userId, { fullName, phoneNumber });
+    }
 
     await Promise.all(orderToServiceServices);
 

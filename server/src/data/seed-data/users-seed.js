@@ -6,13 +6,13 @@ const usersSeed = [
   {
     email: 'admin@demo.com',
     username: 'admin',
-    password: hash('admin'),
+    password: hash('admin123'),
     role: 'Admin'
   },
   {
     email: 'pro1@demo.com',
     username: 'pro1',
-    password: hash('pro'),
+    password: hash('pro123'),
     role: 'Service Provider',
     fullName: 'Петро Петренко'
   },
@@ -20,14 +20,14 @@ const usersSeed = [
   {
     email: 'pro2@demo.com',
     username: 'pro2',
-    password: hash('pro'),
+    password: hash('pro123'),
     role: 'Service Provider',
     fullName: 'Микола Миколенко'
   },
   {
     email: 'user@demo.com',
     username: 'user',
-    password: hash('user'),
+    password: hash('user123'),
     role: 'User'
   },
   {

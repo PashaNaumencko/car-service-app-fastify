@@ -40,7 +40,13 @@ const FillCarInfo = ({ carOptions }) => {
         <YearField control={control} name="yearOfProduction" label="Рік виробництва" width={500} />
       </Box>
       <Box sx={{ marginBottom: 2 }}>
-        <Input control={control} name="licensePlateNumber" label="Номерний знак" width={500} />
+        <Input
+          control={control}
+          name="licensePlateNumber"
+          label="Номерний знак"
+          placeholder="CE 2626 CE"
+          width={500}
+        />
       </Box>
 
       <Button

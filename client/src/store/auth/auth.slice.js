@@ -27,7 +27,6 @@ const reducer = createReducer(initialState, builder => {
       isAnyOf(login.rejected, logout.rejected, register.rejected, loadCurrentUser.rejected),
       (state, action) => {
         state.user = null;
-        // console.log('action.payload', action.payload);
         state.error = action.payload;
         state.dataStatus = DataStatus.REJECTED;
       }

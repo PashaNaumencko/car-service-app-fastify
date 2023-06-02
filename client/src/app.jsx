@@ -58,6 +58,7 @@ const App = () => {
             onLogout={handleUserLogout}
             isSideMenuOpen={isSideMenuOpen}
             onSideMenuOpen={handleSideMenuOpen}
+            username={user?.username}
           />
           <SideMenu isOpen={isSideMenuOpen} onClose={handleSideMenuClose} />
         </>

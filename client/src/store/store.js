@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { http, storage, notification } from 'services/services.js';
+import { http, storage, notification, auth } from 'services/services.js';
 // import { errorHandlerMiddleware } from './middlewares/middlewares';
 import { authReducer } from './auth/auth';
 import { modalReducer } from './modal/modal';
@@ -18,7 +18,8 @@ const store = configureStore({
           services: {
             http,
             storage,
-            notification
+            notification,
+            auth
           }
         }
       }

@@ -27,7 +27,13 @@ const CreateServiceForm = ({ workshopId }) => {
   return (
     <Box as="form" noValidate onSubmit={handleSubmit(handleSubmitService)} sx={{ padding: 5 }}>
       <Box sx={{ marginBottom: 2 }}>
-        <Input control={control} name="title" label="Назва" width={500} />
+        <Input
+          control={control}
+          name="title"
+          label="Назва"
+          placeholder="Заміна задніх гальмівних дисків"
+          width={500}
+        />
       </Box>
       <Box sx={{ marginBottom: 6 }}>
         <Input control={control} name="price" label="Ціна (у грн)" width={500} type="number" />

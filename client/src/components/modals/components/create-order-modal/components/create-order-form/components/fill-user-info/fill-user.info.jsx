@@ -16,7 +16,13 @@ const FillUserInfo = ({ isLoading }) => {
         Заповніть ваші контактні дані
       </Typography>
       <Box sx={{ marginBottom: 2 }}>
-        <Input control={control} name="fullName" label="Імʼя та прізвище" width={500} />
+        <Input
+          control={control}
+          name="fullName"
+          label="Імʼя та прізвище"
+          placeholder="Олена Трафенчук"
+          width={500}
+        />
       </Box>
       <Box sx={{ marginBottom: 6 }}>
         <PhoneNumberInput control={control} name="phoneNumber" label="Номер телефону" width={500} />

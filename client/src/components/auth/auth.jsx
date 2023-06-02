@@ -1,8 +1,8 @@
-import { Typography, Divider, Stack } from '@mui/material';
+import { Typography } from '@mui/material';
 import { AppRoute, DataStatus } from 'common/enums/enums';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, NavLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { authActionCreator } from 'store/auth/auth';
 import { LoginForm } from './components/login-form/login-form';
 import { StyledLoginFormContainer } from './auth.styles';
@@ -15,6 +15,7 @@ const Auth = () => {
     dataStatus: state.auth.dataStatus,
     error: state.auth.error
   }));
+
   const { pathname } = useLocation();
 
   const handleLogin = useCallback(

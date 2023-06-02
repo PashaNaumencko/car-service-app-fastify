@@ -19,7 +19,7 @@ const CompleteOrderModal = () => {
   return (
     <Dialog open onClose={handleClose} PaperProps={{ sx: { minWidth: 550 } }}>
       <StyledModalHeader>
-        <Typography variant="h6">Назначити майстра</Typography>
+        <Typography variant="h6">Виконати роботи</Typography>
         <StyledIconButton direction={ButtonDirection.RIGHT} onClick={handleClose}>
           <CancelRoundedIcon />
         </StyledIconButton>

@@ -3,7 +3,8 @@ import {
   CalendarMonthRounded as CalendarMonthRoundedIcon,
   CancelRounded as CancelRoundedIcon,
   CheckRounded as CheckRoundedIcon,
-  AccountCircleRounded as AccountCircleRoundedIcon
+  AccountCircleRounded as AccountCircleRoundedIcon,
+  EngineeringRounded as EngineeringRoundedIcon
 } from '@mui/icons-material';
 import { Box, Button, Chip, Stack, Typography } from '@mui/material';
 import { OrderStatus, UserRole } from 'common/enums/enums';
@@ -63,7 +64,7 @@ const OrderCard = memo(
                 ) : null}
                 {order.serviceProviderId ? (
                   <Stack direction="row" gap={4} alignItems="center" marginBottom={4}>
-                    <AccountCircleRoundedIcon />
+                    <EngineeringRoundedIcon />
                     <Typography variant="body2" color="text.secondary">
                       Імʼя майстра: {order?.serviceProvider?.user?.fullName}
                     </Typography>

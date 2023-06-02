@@ -48,6 +48,9 @@ const OrderCard = memo(
                 <Typography variant="body2" color="text.secondary" marginBottom={2}>
                   Номерний знак: {order.licensePlateNumber}
                 </Typography>
+                <Typography variant="body2" color="text.secondary" marginBottom={2}>
+                  Ціна: {order.services.reduce((acc, service) => acc + service.price, 0)} грн
+                </Typography>
                 <Stack direction="row" gap={4} alignItems="center" marginBottom={4}>
                   <CalendarMonthRoundedIcon />
                   <Typography variant="body2" color="text.secondary">
